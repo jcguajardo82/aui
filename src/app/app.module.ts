@@ -14,6 +14,10 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { UsersComponent } from './modules/config/users/users.component';
 
+import { MatTableModule } from '@angular/material/table'  
+
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator'  
+
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -43,7 +47,10 @@ const routerConfig: ExtraOptions = {
         LayoutModule,
 
         // 3rd party modules that require global configuration via forRoot
-        MarkdownModule.forRoot({})
+        MarkdownModule.forRoot({}),
+
+        MatTableModule,
+        MatPaginatorModule
     ],
     bootstrap   : [
         AppComponent
