@@ -1,130 +1,145 @@
 <div class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
     <div class="p-6">
-        <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">Recent transactions</div>
-        <div class="text-secondary font-medium">1 pending, 4 completed</div>
+        <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">Administración de Usuarios</div>
+  <!--       <div class="text-secondary font-medium">1 pending, 4 completed</div> -->
     </div>
-    <div class="overflow-x-auto mx-12">
-        <table
-            class="w-full bg-transparent"
-            mat-table
-            matSort
-            [dataSource]="dataSource"
-            [trackBy]="trackByFn"
-            #tableList>
-    
-            <!-- Transaction ID -->
-            <ng-container matColumnDef="id">
-                <th
-                    mat-header-cell
-                    mat-sort-header
-                    *matHeaderCellDef>
-                    ID
-                </th>
-                <td
-                    mat-cell
-                    *matCellDef="let row">
-                    <span class="pr-6 font-medium text-sm text-secondary whitespace-nowrap">
-                        {{row.idUsuario}}
-                    </span>
-                </td>
-            </ng-container>
-    
-            <!-- Date -->
-            <ng-container matColumnDef="nombre">
-                <th
-                    mat-header-cell
-                    mat-sort-header
-                    *matHeaderCellDef>
-                    Nombre
-                </th>
-                <td
-                    mat-cell
-                    *matCellDef="let row">
-                    <span class="pr-6 whitespace-nowrap">
-                        {{row.nombre}}
-                    </span>
-                </td>
-            </ng-container>
-    
-            <!-- Name -->
-            <ng-container matColumnDef="rol">
-                <th
-                    mat-header-cell
-                    mat-sort-header
-                    *matHeaderCellDef>
-                    Rol
-                </th>
-                <td
-                    mat-cell
-                    *matCellDef="let row">
-                    <span class="pr-6 whitespace-nowrap">
-                        {{row.rol}}
-                    </span>
-                </td>
-            </ng-container>
-    
-            <!-- Amount -->
-            <ng-container matColumnDef="usuario">
-                <th
-                    mat-header-cell
-                    mat-sort-header
-                    *matHeaderCellDef>
-                    Usuario
-                </th>
-                <td
-                    mat-cell
-                    *matCellDef="let row">
-                    <span class="pr-6 font-medium whitespace-nowrap">
-                        {{row.usuario}}
-                    </span>
-                </td>
-            </ng-container>
-    
-            <!-- Status -->
-            <ng-container matColumnDef="activo">
-                <th
-                    mat-header-cell
-                    mat-sort-header
-                    *matHeaderCellDef>
-                    Activo
-                </th>
-                <td
-                    mat-cell
-                    *matCellDef="let row">
-                    <span
-                        class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase"
-                        [ngClass]="{'bg-red-200 text-red-800 dark:bg-red-600 dark:text-red-50': row.activo === false,
-                                    'bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50': row.activo === true}">
-                        <span class="leading-relaxed whitespace-nowrap">{{row.activo}}</span>
-                    </span>
-                </td>
-            </ng-container>
-    
-            <!-- Footer -->
-            <ng-container matColumnDef="recentOrdersTableFooter">
-                <td
-                    class="py-6 px-0 border-0"
-                    mat-footer-cell
-                    *matFooterCellDef
-                    colspan="6">
-                    <button mat-stroked-button>No data found</button>
-                </td>
-            </ng-container>
-    
+      <div class="overflow-x-auto mx-12">
+            <table
+                class="w-full bg-transparent"
+                mat-table
+                matSort
+                [dataSource]="dataSource"
+                [trackBy]="trackByFn"
+                #tableList>
+        
+                <!-- Transaction ID -->
+                <ng-container matColumnDef="id">
+                    <th
+                        mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef>
+                        ID
+                    </th>
+                    <td
+                        mat-cell
+                        *matCellDef="let row">
+                        <span class="pr-6 font-medium text-sm text-secondary whitespace-nowrap">
+                            {{row.idUsuario}}
+                        </span>
+                    </td>
+                </ng-container>
+        
+                <!-- Date -->
+                <ng-container matColumnDef="nombre">
+                    <th
+                        mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef>
+                        Nombre
+                    </th>
+                    <td
+                        mat-cell
+                        *matCellDef="let row">
+                        <span class="pr-6 whitespace-nowrap">
+                            {{row.nombre}}
+                        </span>
+                    </td>
+                </ng-container>
+        
+                <!-- Name -->
+                <ng-container matColumnDef="rol">
+                    <th
+                        mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef>
+                        Rol
+                    </th>
+                    <td
+                        mat-cell
+                        *matCellDef="let row">
+                        <span class="pr-6 whitespace-nowrap">
+                            {{row.rol}}
+                        </span>
+                    </td>
+                </ng-container>
+        
+                <!-- Amount -->
+                <ng-container matColumnDef="usuario">
+                    <th
+                        mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef>
+                        Usuario
+                    </th>
+                    <td
+                        mat-cell
+                        *matCellDef="let row">
+                        <span class="pr-6 font-medium whitespace-nowrap">
+                            {{row.usuario}}
+                        </span>
+                    </td>
+                </ng-container>
+        
+                <!-- Status -->
+                <ng-container matColumnDef="activo">
+                    <th
+                        mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef>
+                        Activo
+                    </th>
+                    <td
+                        mat-cell
+                        *matCellDef="let row">
+                        <span
+                            class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase"
+                            [ngClass]="{'bg-red-200 text-red-800 dark:bg-red-600 dark:text-red-50': row.activo === false,
+                                        'bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50': row.activo === true}">
+                            <span class="leading-relaxed whitespace-nowrap">{{row.activo}}</span>
+                        </span>
+                    </td>
+                </ng-container>
 
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef>
+<!--                       <button mat-icon-button color="primary" (click)="addNew()">
+                        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                      </button> -->
+       <!-- Add contact button -->
+                    <button
+                    class="ml-4"
+                    mat-flat-button
+                    [color]="'primary'"
+                    >
+                    <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                    <span class="ml-2 mr-1">Add</span>
+                    </button>
 
-            <tr
-                mat-header-row
-                *matHeaderRowDef="tableColumns"></tr>
-            <tr
-                class="order-row h-16"
-                mat-row
-                *matRowDef="let row; columns: tableColumns;"></tr>
-            <tr
-                class="h-16 border-0"
-                mat-footer-row
-                *matFooterRowDef="['recentOrdersTableFooter']"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-    </div>
+                    </mat-header-cell>
+              
+                    <mat-cell *matCellDef="let row; let i=index;">
+                      <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                      </button>
+              
+                      <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
+                        <mat-icon aria-label="Delete">delete</mat-icon>
+                      </button>
+                    </mat-cell>
+                </ng-container>
+
+                <tr
+                    mat-header-row
+                    *matHeaderRowDef="tableColumns"></tr>
+                <tr
+                    class="order-row h-16"
+                    mat-row
+                    *matRowDef="let row; columns: tableColumns;"></tr>
+        
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+        
+        </div>
+    
 </div>

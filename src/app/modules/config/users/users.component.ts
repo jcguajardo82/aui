@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit {
 
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
-  tableColumns: string[] = ['id', 'nombre', 'usuario', 'rol', 'activo'];
+  tableColumns: string[] = ['id', 'nombre', 'usuario', 'rol', 'activo','actions'];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   users:User[];
 
