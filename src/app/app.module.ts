@@ -16,8 +16,16 @@ import { UsersComponent } from './modules/config/users/users.component';
 
 import { MatTableModule } from '@angular/material/table'  
 
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator'  
-
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { UserModalComponent } from './modules/config/users/user-modal/user-modal.component';
+import { matDialogAnimations, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from "@angular/material/icon";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import {  MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -28,6 +36,9 @@ const routerConfig: ExtraOptions = {
     declarations: [
         AppComponent,
         UsersComponent,
+        UserModalComponent,
+        
+
    
     ],
     imports     : [
@@ -50,7 +61,15 @@ const routerConfig: ExtraOptions = {
         MarkdownModule.forRoot({}),
 
         MatTableModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatSelectModule
     ],
     bootstrap   : [
         AppComponent

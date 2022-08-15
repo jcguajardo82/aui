@@ -5,6 +5,8 @@ import { Subject, takeUntil } from 'rxjs';
 import {UserService} from  'app/services/user.service'
 import { User } from 'app/models/user.model';
 import { MatPaginator } from '@angular/material/paginator';
+import { UserModalComponent } from 'app/modules/config/users/user-modal/user-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-users',
@@ -21,8 +23,11 @@ export class UsersComponent implements OnInit {
   tableColumns: string[] = ['id', 'nombre', 'usuario', 'rol', 'activo','actions'];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   users:User[];
+  user:User;
 
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService,
+    private _modal :MatDialog
+    ) { }
 
   ngOnInit(): void {
     this.userService.getAll() .subscribe(
@@ -65,6 +70,20 @@ export class UsersComponent implements OnInit {
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
 
+/**
+     * Add a new note
+     */
+ addNew(): void
+ {
+     this.user = new User;
+     this._modal.open(UserModalComponent, {
+         autoFocus: false,
+         data     : {
+             user: this.user
+         }
+     });
+ }
+  
   /**
   * Track by function for ngFor loops
   *

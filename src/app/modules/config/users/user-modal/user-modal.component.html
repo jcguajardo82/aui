@@ -1,0 +1,83 @@
+ <!-- Alert -->
+ <fuse-alert
+ class="mt-8 -mb-4"
+ *ngIf="showAlert"
+ [appearance]="'outline'"
+ [showIcon]="false"
+ [type]="alert.type"
+ [@shake]="alert.type === 'error'">
+ {{alert.message}}
+</fuse-alert>
+<form
+    class="mt-8"
+    [formGroup]="dataForm"
+    #dataNgForm="ngForm">
+
+    <!-- Name field -->
+    <mat-form-field class="w-full">
+        <mat-label>Nombre Completo</mat-label>
+        <input
+            id="nombre"
+            matInput
+            [formControlName]="'nombre'">
+        <mat-error *ngIf="dataForm.get('nombre').hasError('required')">
+            El nombre es requiredo
+        </mat-error>
+    </mat-form-field>
+
+    <!-- usuario field -->
+    <mat-form-field class="w-full">
+        <mat-label>Usuario</mat-label>
+        <input
+            id="usuario"
+            matInput
+            [formControlName]="'usuario'">
+        <mat-error *ngIf="dataForm.get('usuario').hasError('required')">
+            El usuario es requiredo
+        </mat-error>
+        
+    </mat-form-field>
+
+    <mat-form-field class="flex-auto gt-xs:pr-3">
+        <mat-select [placeholder]="'Estatus'" id="estatus"  [formControlName]="'estatus'">
+            <mat-option value="true">Activo</mat-option>
+            <mat-option value="false">Inactivo</mat-option>         
+        </mat-select>
+        <mat-error *ngIf="dataForm.get('estatus').hasError('required')">
+            El estatus es requiredo
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="flex-auto gt-xs:pr-3">
+        <mat-select [placeholder]="'Rol'" id="rol"  [formControlName]="'rol'"
+        [(ngModel)]="selectedRolId"
+        >
+            <mat-option *ngFor="let item of roles" [value]="item.idRol" >
+                {{ item.nombreRol }}
+            </mat-option>      
+        </mat-select>
+        <mat-error *ngIf="dataForm.get('rol').hasError('required')">
+            El estatus es requiredo
+        </mat-error> 
+    </mat-form-field>
+
+    
+
+
+    <!-- Submit button -->
+    <button
+        class="fuse-mat-button-large w-full mt-6"
+        mat-flat-button
+        [color]="'primary'"
+        [disabled]="dataForm.disabled"
+       >
+        <span *ngIf="!dataForm.disabled">
+            Guardar
+        </span>
+        <mat-progress-spinner
+            *ngIf="dataForm.disabled"
+            [diameter]="24"
+            [mode]="'indeterminate'"></mat-progress-spinner>
+    </button>
+
+</form>
