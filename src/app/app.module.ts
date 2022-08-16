@@ -26,6 +26,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {  MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MenusComponent } from './modules/config/menus/menus.component';
+import { MenuModalComponent } from './modules/config/menus/menu-modal/menu-modal.component';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -37,6 +39,8 @@ const routerConfig: ExtraOptions = {
         AppComponent,
         UsersComponent,
         UserModalComponent,
+        MenusComponent,
+        MenuModalComponent,
         
 
    

@@ -5,10 +5,10 @@ export class Rol {
       activo :boolean;
 
       constructor(){
-        idRol: 0;
-        nombreRol: "";
-        descripcion :"";
-        activo :true;
+        this.idRol= 0;
+        this.nombreRol= "";
+        this.descripcion ="";
+        this.activo =true;
       }
 }
 
