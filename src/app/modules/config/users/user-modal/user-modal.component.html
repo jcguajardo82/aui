@@ -12,7 +12,7 @@
     class="mt-8"
     [formGroup]="dataForm"
     #dataNgForm="ngForm">
-
+    <input  hidden="true"  matInput class="form-control" formControlName="id" id="id">
     <!-- Name field -->
     <mat-form-field class="w-full">
         <mat-label>Nombre Completo</mat-label>
@@ -39,9 +39,10 @@
     </mat-form-field>
 
     <mat-form-field class="flex-auto gt-xs:pr-3">
-        <mat-select [placeholder]="'Estatus'" id="estatus"  [formControlName]="'estatus'">
-            <mat-option value="true">Activo</mat-option>
-            <mat-option value="false">Inactivo</mat-option>         
+        <mat-select [placeholder]="'Estatus'" id="estatus"  [formControlName]="'estatus'"  [(ngModel)]="this.selectedSatus">
+            <mat-option *ngFor="let item of status" [value]="item.val" >
+                {{ item.label }}
+            </mat-option>        
         </mat-select>
         <mat-error *ngIf="dataForm.get('estatus').hasError('required')">
             El estatus es requiredo
@@ -57,27 +58,30 @@
             </mat-option>      
         </mat-select>
         <mat-error *ngIf="dataForm.get('rol').hasError('required')">
-            El estatus es requiredo
+            El rol es requiredo
         </mat-error> 
     </mat-form-field>
 
-    
+    <ng-container>
+        <div class="flex items-center justify-end mt-4">
+            <button mat-button (click)="onNoClick()">
+                Cancel
+            </button>
+               <!-- Submit button -->
+            <button (click)="Save()"
+                mat-flat-button
+                [color]="'primary'"
+                
+                >
+                Save
+                <mat-progress-spinner
+                *ngIf="dataForm.disabled"
+                [diameter]="24"
+                [mode]="'indeterminate'"></mat-progress-spinner>
+            </button>
+        </div>
+    </ng-container>
 
 
-    <!-- Submit button -->
-    <button
-        class="fuse-mat-button-large w-full mt-6"
-        mat-flat-button
-        [color]="'primary'"
-        [disabled]="dataForm.disabled"
-       >
-        <span *ngIf="!dataForm.disabled">
-            Guardar
-        </span>
-        <mat-progress-spinner
-            *ngIf="dataForm.disabled"
-            [diameter]="24"
-            [mode]="'indeterminate'"></mat-progress-spinner>
-    </button>
 
 </form>

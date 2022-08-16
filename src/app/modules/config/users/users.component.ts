@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit {
 
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
-  tableColumns: string[] = ['id', 'nombre', 'usuario', 'rol', 'activo','actions'];
+  tableColumns: string[] = ['idUsuario', 'nombre', 'usuario', 'rol', 'activo','actions'];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   users:User[];
   user:User;
@@ -75,11 +75,24 @@ export class UsersComponent implements OnInit {
      */
  addNew(): void
  {
-     this.user = new User;
+     //this.user = new User;
+     this._modal.afterAllClosed.subscribe(data=> this.ngOnInit() );
      this._modal.open(UserModalComponent, {
          autoFocus: false,
          data     : {
-             user: this.user
+             user: new User
+         }
+     });
+ }
+
+ startEdit(_user: User): void
+ {
+     this.user = new User;
+     this._modal.afterAllClosed.subscribe(data=> this.ngOnInit() );
+     this._modal.open(UserModalComponent, {
+         autoFocus: false,
+         data     : {
+             user: _user
          }
      });
  }
