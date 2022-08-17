@@ -73,7 +73,8 @@ const routerConfig: ExtraOptions = {
         ReactiveFormsModule,
         MatButtonModule,
         MatCheckboxModule,
-        MatSelectModule
+        MatSelectModule,
+        FormsModule
     ],
     bootstrap   : [
         AppComponent

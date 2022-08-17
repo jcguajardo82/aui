@@ -6,14 +6,45 @@
     </div>
  
     <div class="overflow-x-auto mx-3">
-        <mat-select [placeholder]="'Seleccione un Menu'" id="ddlMenu"    
+        <mat-select [placeholder]="'Seleccione un Menu'" id="ddlMenu"   [(ngModel)]="this.selectedMenu"   
         (ngModelChange)="onChangeMenu()"   >
             <mat-option *ngFor="let item of menus" [value]="item.menuId" >
                 {{ item.descripcion }}
             </mat-option>      
-        </mat-select>       
+        </mat-select>   
+        <button
+        class="ml-4 px-1 sm:px-4 min-w-10"
+        mat-flat-button
+        [color]="'primary'"
+        (click)="addNew()">
+        <mat-icon
+            class="icon-size-5"
+            [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+        <span class="hidden sm:inline-block ml-2">New Menu</span>
+        </button>
+        
     </div>
  
+    <button
+        class="ml-4 px-1 sm:px-4 min-w-10"
+        mat-flat-button
+        [color]="'primary'"
+        (click)="editMenu()">
+        <mat-icon
+            class="icon-size-5"
+            [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+        <span class="hidden sm:inline-block ml-2">Edit Menu</span>
+    </button>  
+    <button
+    class="ml-4 px-1 sm:px-4 min-w-10"
+    mat-flat-button
+    [color]="'primary'"
+    (click)="deleteItem(0)">
+    <mat-icon
+        class="icon-size-5"
+        [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+    <span class="hidden sm:inline-block ml-2">Delete Menu</span>
+    </button> 
     <div class="overflow-x-auto mx-12">
         <table
         class="w-full bg-transparent"
@@ -128,14 +159,14 @@
             <span class="hidden sm:inline-block ml-2">New</span>
         </button>
 
-            </mat-header-cell>
+        </mat-header-cell>
 
             <mat-cell *matCellDef="let row; let i=index;">
                 <button mat-icon-button color="accent" (click)="startEdit(row)">
                 <mat-icon aria-label="Edit">edit</mat-icon>
                 </button>
 
-                <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
+                <button mat-icon-button color="accent" (click)="deleteItem( row.menuId)">
                 <mat-icon aria-label="Delete">delete</mat-icon>
                 </button>
             </mat-cell>

@@ -25,7 +25,7 @@ export class MenuService {
     }
   
     getMenu(idMenu): Observable<any> {
-      return this.http.get<any>(`${environment.API_URL}/api/UpdMenuGetMenu/${idMenu}`) ;
+      return this.http.get<any>(`${environment.API_URL}/api/GetMenu/${idMenu}`) ;
     }
   
     getMenusPadre(): Observable<any> {

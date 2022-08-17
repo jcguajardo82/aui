@@ -48,16 +48,16 @@ export class MenuModalComponent implements OnInit {
      // Edit
      if ( this._data.menu.menuId!=0 )
      {
- 
-        
+   
          this.selectedSatus = String(this._data.menu.habilitado);
-         //console.log("Llamamos el servicio de get user by id")
+
      }
      
  
        // Create the form
        this.dataForm = this._formBuilder.group({
          id          : [this._data.menu.menuId, Validators.required],
+         padreId:  [this._data.menu.padreId, Validators.required],
          txtDesc      : [this._data.menu.descripcion, Validators.required],
          txtDescCorta     : [this._data.menu.descripcionCorta, [Validators.required]],
          txtUrl     : [this._data.menu.url, [Validators.required]],
@@ -93,6 +93,7 @@ export class MenuModalComponent implements OnInit {
   this._menu.url=this.dataForm.value["txtUrl"];
   this._menu.icono=this.dataForm.value["txtIcono"];
   this._menu.habilitado=this.dataForm.value["estatus"];
+  this._menu.padreId=this.dataForm.value["padreId"];
 
   if(this._menu.menuId==0)
     {
@@ -114,9 +115,27 @@ export class MenuModalComponent implements OnInit {
                 
                 });
     }
+    else{
+      this.menuService.Update(this._menu)
+      .subscribe(
+        response => {
+          if (response.isSuccess) {
+            this.onNoClick();
+          }
+          else {
+          this.onError(response.message);
+          }
+          
+    
+        },
+        error => {
+          this.onError(error.message);
+        });
+    }
 
   }
 
+ 
   onError(_message : string):void{
       // Re-enable the form
       this.dataForm.enable();
