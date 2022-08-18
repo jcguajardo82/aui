@@ -183,6 +183,8 @@ signIn(credentials: { username: string; password: string }): Observable<any>
     /**
      * Check the authentication status
      */
+test:any;
+
     check(): Observable<boolean>
     {
         // Check if the user is logged in
@@ -204,6 +206,8 @@ signIn(credentials: { username: string; password: string }): Observable<any>
         }
 
         // If the access token exists and it didn't expire, sign in using it
-        return this.signInUsingToken();
+        
+        //return this.signInUsingToken();
+        return  of(true);
     }
 }
