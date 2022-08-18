@@ -21,6 +21,7 @@ import { UserModalComponent } from './modules/config/users/user-modal/user-modal
 import { matDialogAnimations, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatToolbarModule} from '@angular/material/toolbar'
 import { MatIconModule } from "@angular/material/icon";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
@@ -28,6 +29,10 @@ import {  MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MenusComponent } from './modules/config/menus/menus.component';
 import { MenuModalComponent } from './modules/config/menus/menu-modal/menu-modal.component';
+import { RolesComponent } from './modules/config/roles/roles/roles.component';
+import { RolModalComponent } from './modules/config/roles/rol-modal/rol-modal.component';
+
+
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -41,6 +46,8 @@ const routerConfig: ExtraOptions = {
         UserModalComponent,
         MenusComponent,
         MenuModalComponent,
+        RolesComponent,
+        RolModalComponent,
         
 
    
@@ -74,7 +81,8 @@ const routerConfig: ExtraOptions = {
         MatButtonModule,
         MatCheckboxModule,
         MatSelectModule,
-        FormsModule
+        FormsModule,
+        MatToolbarModule
     ],
     bootstrap   : [
         AppComponent

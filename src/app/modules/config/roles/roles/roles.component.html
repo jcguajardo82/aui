@@ -1,0 +1,45 @@
+
+<div class="flex flex-col flex-auto w-full">
+
+    <div class="flex flex-wrap w-full max-w-screen-xl mx-auto p-6 md:p-8">
+
+        <!-- Title and action buttons -->
+        <div class="flex items-center justify-between w-full">
+            <div>
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <mat-select [placeholder]="'Rol'" id="rol"  [formControlName]="'rol'"
+                    [(ngModel)]="selectedRolId"  (ngModelChange)="onChangeRol()"
+                    >
+                        <mat-option *ngFor="let item of roles" [value]="item.idRol" >
+                            {{ item.nombreRol }}
+                        </mat-option>      
+                    </mat-select>      
+                </mat-form-field>
+            </div>
+            <div class="flex items-center ml-6">
+                <button
+                    class="ml-4 px-1 sm:px-4 min-w-10"
+                    mat-flat-button
+                    [color]="'primary'"
+                    (click)="addNew()">
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                    <span class="hidden sm:inline-block ml-2">New</span>
+                </button>
+                <button
+                    (click)="startEdit()"
+                    class="hidden sm:inline-flex"
+                    mat-stroked-button>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:pencil-alt'"></mat-icon>
+                    <span class="ml-2">Edit</span>
+                </button>              
+            </div>
+        </div>
+    </div>
+</div>
+<form>
+
+</form>

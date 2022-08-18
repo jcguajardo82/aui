@@ -1,0 +1,71 @@
+ <!-- Alert -->
+ <fuse-alert
+ class="mt-8 -mb-4"
+ *ngIf="showAlert"
+ [appearance]="'outline'"
+ [showIcon]="false"
+ [type]="alert.type"
+ [@shake]="alert.type === 'error'">
+ {{alert.message}}
+</fuse-alert>
+<form
+    class="mt-8"
+    [formGroup]="dataForm"
+    #dataNgForm="ngForm">
+    <input  hidden="true"  matInput class="form-control" formControlName="id" id="id">
+
+    <!-- Name field -->
+    <mat-form-field class="w-full">
+        <mat-label>Nombre Rol</mat-label>
+        <input
+            id="txtNombreRol"
+            matInput
+            [formControlName]="'txtNombreRol'">
+        <mat-error *ngIf="dataForm.get('txtNombreRol').hasError('required')">
+            El nombre del rol es requerido
+        </mat-error>
+    </mat-form-field>
+
+    <!-- usuario field -->
+    <mat-form-field class="w-full">
+        <mat-label>Descripción</mat-label>
+        <input
+            id="txtDesc"
+            matInput
+            [formControlName]="'txtDesc'">
+        <mat-error *ngIf="dataForm.get('txtDesc').hasError('required')">
+            La descripción del rol es requerido
+        </mat-error>
+        
+    </mat-form-field>
+    <mat-form-field class="flex-auto gt-xs:pr-3">
+        <mat-select [placeholder]="'Estatus'" id="estatus"  [formControlName]="'estatus'"  [(ngModel)]="this.selectedSatus" required>
+            <mat-option *ngFor="let item of status" [value]="item.val" >
+                {{ item.label }}
+            </mat-option>        
+        </mat-select>
+        <mat-error *ngIf="dataForm.get('estatus').hasError('required')">
+            El estatus es requerido
+        </mat-error>
+    </mat-form-field>
+
+    <ng-container>
+        <div class="flex items-center justify-end mt-4">
+            <button mat-button (click)="onNoClick()">
+                Cancel
+            </button>
+               <!-- Submit button -->
+            <button (click)="Save()"
+                mat-flat-button
+                [color]="'primary'"
+                
+                >
+                Save
+                <mat-progress-spinner
+                *ngIf="dataForm.disabled"
+                [diameter]="24"
+                [mode]="'indeterminate'"></mat-progress-spinner>
+            </button>
+        </div>
+    </ng-container>
+</form>
