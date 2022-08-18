@@ -21,7 +21,7 @@ export class RolService {
   }
 
   getMenuRol(idRol): Observable<any> {
-    return this.http.get<any>(`${environment.API_URL}/api/GetMenuRol/${idRol}`); 
+    return this.http.get<any>(`${environment.API_URL}/api/GetMenuRolFuse/${idRol}`); 
    
   }
 

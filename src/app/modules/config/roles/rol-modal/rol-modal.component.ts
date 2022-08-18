@@ -49,10 +49,9 @@ export class RolModalComponent implements OnInit {
      {
    
          this.selectedSatus = String(this._data.rol.activo);
-
+        
      }
-     
- 
+    
        // Create the form
        this.dataForm = this._formBuilder.group({
          id          : [this._data.rol.idRol, Validators.required],
@@ -63,6 +62,9 @@ export class RolModalComponent implements OnInit {
          
        });
   }
+
+
+
 
   onNoClick(): void {
     // Close the dialog
@@ -109,6 +111,23 @@ export class RolModalComponent implements OnInit {
                       this.onError(error.message);
                     
                     });
+        }
+        else{
+          this.rolService.updRol(this._rol)
+          .subscribe(
+            response => {
+
+              if (response.isSuccess) {
+                this.onNoClick();
+              }
+              else {
+              this.onError(response.message);
+              }
+            },
+            error => {
+              this.onError(error.message);
+            });
+
         }
        
   }

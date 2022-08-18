@@ -31,8 +31,8 @@ import { MenusComponent } from './modules/config/menus/menus.component';
 import { MenuModalComponent } from './modules/config/menus/menu-modal/menu-modal.component';
 import { RolesComponent } from './modules/config/roles/roles/roles.component';
 import { RolModalComponent } from './modules/config/roles/rol-modal/rol-modal.component';
-
-
+import {MatTreeModule} from '@angular/material/tree';
+import {CdkTreeModule} from '@angular/cdk/tree';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -82,7 +82,9 @@ const routerConfig: ExtraOptions = {
         MatCheckboxModule,
         MatSelectModule,
         FormsModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatTreeModule,
+        
     ],
     bootstrap   : [
         AppComponent
