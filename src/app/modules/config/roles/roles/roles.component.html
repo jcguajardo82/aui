@@ -6,8 +6,9 @@
         <div class="flex items-center justify-between w-full">
             <div>
                 <mat-form-field class="flex-auto gt-xs:pr-3">
-                    <mat-select [placeholder]="'Rol'" id="rol"  [formControlName]="'rol'"
-                    [(ngModel)]="selectedRolId"  (ngModelChange)="onChangeRol()"
+                    <mat-select [placeholder]="'Rol'" id="rol" 
+                    [(ngModel)]="selectedRolId" 
+                    (selectionChange)="onChangeRol($event.value)"
                     >
                         <mat-option *ngFor="let item of roles" [value]="item.idRol" >
                             {{ item.nombreRol }}
@@ -38,7 +39,7 @@
             </div>
         </div>
 
-        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl"  class="mat-nested-tree-node">
             <!-- This is the tree node template for leaf nodes -->
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
               <li class="mat-tree-node">

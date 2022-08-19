@@ -52,7 +52,6 @@ export class RolesComponent implements OnInit {
         console.log(error.message);
       });
 
-      this.loadMenus(5);
   }
 
   addNew(): void
@@ -61,10 +60,7 @@ export class RolesComponent implements OnInit {
   }
 
   startEdit():void{
-     
-    this.selectedRolId=5;
-     
-    
+       
     if (this.selectedRolId != undefined) {
           this.rolService.getRol(this.selectedRolId).subscribe(
             data => {
@@ -86,8 +82,9 @@ export class RolesComponent implements OnInit {
    
   }
 
-  onChangeRol():void{
-    console.log('cambio de rol');
+  onChangeRol(id):void{
+   this.selectedRolId=id;
+   this.loadMenus(this.selectedRolId);
   }
 
 
@@ -163,7 +160,7 @@ export class RolesComponent implements OnInit {
   }
 
   addMenuRol(activo:boolean,idMenu:number){
-    this.selectedRolId=5;
+
     var menuRol =new SetMenuRol;
     menuRol.activo=activo;
     menuRol.idMenu=idMenu;
