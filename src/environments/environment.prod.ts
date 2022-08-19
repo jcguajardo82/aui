@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    API_URL: 'http://localhost:7071'
+    API_URL: 'https://baseitechfunction.azurewebsites.net'
 };
