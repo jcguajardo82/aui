@@ -80,6 +80,7 @@ export const appRoutes: Route[] = [
             {path: 'users', component:UsersComponent},
             {path: 'menus', component:MenusComponent},
             {path: 'roles', component:RolesComponent},
+            {path: 'bot', loadChildren: () => import('app/modules/admin/configuration/bot-options/bot-options.module').then(m => m.BotOptionsModule)},
         ]
     }
 ];

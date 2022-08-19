@@ -1,0 +1,336 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div *ngIf="!mostrar" class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Bot WhatsApp</a>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Opciones del Bot
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div style="height: 700px;" class="flex-auto p-6 xs:p-10">
+
+        <div class="max-w-3xl">
+
+            <div class="example-viewer">
+
+                <!-- <div class="title">
+                    <h6>Configure the dialog and preview it</h6>
+                </div> -->
+
+                <div class="flex flex-col p-8 pt-0">
+                    <div *ngIf="mostrar">
+                        <mat-form-field style="width: 100%;"  appearance="fill">
+                          <mat-label>Opcion Seleccionada</mat-label>
+                          <input [disabled]="addOpc" matInput [(ngModel)]="tituloOpcion">
+                        </mat-form-field>
+                        <!-- <mat-checkbox class="example-margin" [(ngModel)]="api">Consumir desde API</mat-checkbox> -->
+                        <!-- <mat-label *ngIf="mostrar">{{tituloOpcion}}</mat-label> -->
+                        <mat-form-field style="width: 100%;" appearance="fill">
+                          <mat-label>Selecciona el Retorno</mat-label>
+                          <mat-select  [(ngModel)]="selectRetorno" name="retorno">
+                            <mat-option *ngFor="let retorno of retornoLST" [value]="retorno">
+                              {{retorno}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <mat-label>Escriba el Mensaje Inicial </mat-label>
+                      <mat-form-field appearance="outline">
+                        <mat-label>Mensaje</mat-label>
+                        <!-- <input type="text" formControlName="mensaje" matInput /> -->
+                        <textarea matInput [(ngModel)]="mensaje"></textarea>
+                        <!-- <mat-error>Debe Escribir un texto para poder Enviar</mat-error> -->
+                      </mat-form-field>
+                      <div *ngIf="mostrar">
+                            <button
+                                mat-flat-button
+                                [color]="'warn'"
+                                (click)="conApi()">
+                                Con Api
+                                <mat-icon  *ngIf="api"class="text-white-400 icon-size-5" [svgIcon]="'mat_solid:check'"></mat-icon>
+                            </button>
+                            <button
+                                mat-flat-button
+                                [color]="'accent'"
+                                (click)="sinApi()">
+                                Sin API
+                                <mat-icon  *ngIf="!api"class="text-white-400 icon-size-5" [svgIcon]="'mat_solid:check'"></mat-icon>
+                            </button>
+                        </div>
+                        <div *ngIf="!api">
+                            <mat-label>Escribe las Opciones del mensaje</mat-label>
+                            <mat-form-field style="width: 100%;" appearance="fill">
+                                <mat-label>Opciones</mat-label>
+                                <mat-chip-list #chipList aria-label="Opciones">
+                                <mat-chip *ngFor="let opcion of opcionesLST" (click)="edit(opcion)" (removed)="remove(opcion)">
+                                    {{opcion.titulo}}
+                                    <button matChipRemove>
+                                        <mat-icon class="text-white-400 icon-size-5" [svgIcon]="'mat_solid:cancel'"></mat-icon>
+                                        <!-- <mat-icon
+                                        class="text-green-400 icon-size-5"
+                                        [svgIcon]="'heroicons_outline:plus'"></mat-icon> -->
+                                    </button>
+                                </mat-chip>
+                                <input placeholder="Nueva Opcion..."
+                                        [matChipInputFor]="chipList"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                        [matChipInputAddOnBlur]="addOnBlur"
+                                        (matChipInputTokenEnd)="add($event)">
+                                </mat-chip-list>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col gt-xs:flex-row" *ngIf="api">
+                            <mat-horizontal-stepper
+                                    [linear]="true"
+                                    #horizontalStepper>
+                                    <mat-step [stepControl]="valid1"
+                                        #horizontalStepperStep1>
+                                        <ng-template matStepLabel>URL</ng-template>
+                                        <p class="my-6 font-medium">
+                                            Introduzca la URL y seleccione el metodo de consumo del API
+                                        </p>
+                                        <div class="flex">
+                                            <mat-form-field class="flex-auto">
+                                                <mat-label>URL</mat-label>
+                                                <textarea matInput [(ngModel)]="urlApi" (keyup)="onKeyup($event)"></textarea>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="flex flex-col gt-xs:flex-row">
+                                            <mat-form-field class="flex-auto gt-xs:pr-3">
+                                                <mat-label>Metodo</mat-label>
+                                                <mat-select  [(ngModel)]="selectMetodo" name="metodo">
+                                                    <mat-option *ngFor="let metodo of metodosLST" [value]="metodo">
+                                                        {{metodo}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                        </div>
+                                        <div class="flex justify-end">
+                                            <button
+                                                class="px-8"
+                                                mat-flat-button
+                                                [color]="'primary'"
+                                                [disabled]="valid1.invalid"
+                                                type="button"
+                                                matStepperNext>
+                                                Siguiente
+                                            </button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [stepControl]="valid2"
+                                        #horizontalStepperStep2>
+                                        <ng-template matStepLabel>Parametros</ng-template>
+                                        <p class="my-6 font-medium">
+                                            Escribe los Parametros de Entrada para el consumo del API
+                                        </p>
+                                        <div class="flex flex-col gt-xs:flex-row">
+                                            <table mat-table [dataSource]="paramsLST" class="mat-elevation-z4">
+
+                                                <ng-container matColumnDef="nombre" style="width: 100px;">
+                                                    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                                                    <td mat-cell style="width: 100px;"*matCellDef="let item">
+                                                      <input matInput [(ngModel)]="item.nombre" (keyup)="onKeyupParam($event)">
+                                                    </td>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="valor" style="width: 100px;">
+                                                    <th mat-header-cell *matHeaderCellDef>Valor</th>
+                                                    <td mat-cell style="width: 100px;" *matCellDef="let item">
+                                                        <mat-select  [(ngModel)]="item.valor" name="valor" style="width: 80px;">
+                                                        <mat-option *ngFor="let opc of opcsLST" [value]="opc">
+                                                          {{opc}}
+                                                        </mat-option>
+                                                      </mat-select>
+                                                    </td>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="tipo" style="width: 100px;">
+                                                  <th mat-header-cell *matHeaderCellDef>Tipo</th>
+                                                  <td mat-cell style="width: 100px;" *matCellDef="let item">
+                                                      <mat-select  [(ngModel)]="item.tipo" name="valor" style="width: 80px;">
+                                                      <mat-option *ngFor="let tipo of tipoLST" [value]="tipo">
+                                                        {{tipo}}
+                                                      </mat-option>
+                                                    </mat-select>
+                                                  </td>
+                                              </ng-container>
+
+                                              <ng-container matColumnDef="valorDefault" style="width: 100px;">
+                                                  <th mat-header-cell *matHeaderCellDef>Valor Default</th>
+                                                  <td mat-cell style="width: 100px;"*matCellDef="let item">
+                                                    <input matInput [(ngModel)]="item.valorDefault">
+                                                  </td>
+                                              </ng-container>
+
+                                              <ng-container matColumnDef="accion" style="width: 100px;">
+                                                <th mat-header-cell *matHeaderCellDef>Accion</th>
+                                                <td mat-cell style="width: 100px;"*matCellDef="let item">
+                                                  <button mat-flat-button (click)="deleteParam(item)" [color]="'warn'">Eliminar</button>
+                                                </td>
+                                              </ng-container>
+
+                                                <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+                                                <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+                                            </table>
+                                            <button mat-flat-button (click)="addParam()" [color]="'primary'">+</button>
+                                        </div>
+
+                                        <div class="flex justify-end">
+                                            <button
+                                                class="px-8 mr-2"
+                                                mat-flat-button
+                                                [color]="'accent'"
+                                                type="button"
+                                                matStepperPrevious>
+                                                Atras
+                                            </button>
+                                            <button
+                                                class="px-8"
+                                                mat-flat-button
+                                                [color]="'primary'"
+                                                [disabled]="valid2.invalid"
+                                                type="button"
+                                                matStepperNext>
+                                                Siguiente
+                                            </button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step>
+                                        <ng-template matStepLabel>Mensaje</ng-template>
+                                        <p class="my-6 font-medium">
+                                            Escribe los Campos de Salida que se tomaran en cuenta para el Mensaje de Respuesta
+                                        </p>
+                                        <div class="flex flex-col gt-xs:flex-row">
+                                            <mat-form-field style="width: 100%" appearance="fill">
+                                                <mat-label>Campos para Mensaje</mat-label>
+                                                <mat-chip-list #chipListMsj aria-label="OpcionesMsj">
+                                                  <mat-chip *ngFor="let opcion of opcionesMsjLST" (removed)="removeOpcMsj(opcion)">
+                                                    {{opcion}}
+                                                    <button matChipRemove>
+                                                        <mat-icon class="text-white-400 icon-size-5" [svgIcon]="'mat_solid:cancel'"></mat-icon>
+                                                    </button>
+                                                  </mat-chip>
+                                                  <input placeholder="Nueva Opcion..."
+                                                        [matChipInputFor]="chipListMsj"
+                                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                        [matChipInputAddOnBlur]="addOnBlur"
+                                                        (matChipInputTokenEnd)="addOpcMsj($event)">
+                                                </mat-chip-list>
+                                              </mat-form-field>
+                                        </div>
+                                        <div class="flex justify-end mt-8">
+                                            <button
+                                                class="px-8 mr-2"
+                                                mat-flat-button
+                                                [color]="'accent'"
+                                                type="button"
+                                                matStepperPrevious>
+                                                Atras
+                                            </button>
+                                            <button
+                                                class="px-8"
+                                                mat-flat-button
+                                                [color]="'primary'"
+                                                type="button"
+                                                matStepperNext>
+                                                Siguiente
+                                            </button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step>
+                                        <ng-template matStepLabel>Opciones</ng-template>
+                                        <p class="my-6 font-medium">
+                                            Escribe los Campos de Salida que se tomaran en cuenta para armar las Opciones
+                                        </p>
+                                        <div class="flex flex-col gt-xs:flex-row">
+                                            <mat-form-field style="width: 100%" appearance="fill">
+                                                <mat-label>Campos para Opciones</mat-label>
+                                                <mat-chip-list #chipListOpc aria-label="OpcionesApi">
+                                                  <mat-chip *ngFor="let opcion of opcionesApiLST"  (removed)="removeOpcApi(opcion)">
+                                                    {{opcion}}
+                                                    <button matChipRemove>
+                                                        <mat-icon class="text-white-400 icon-size-5" [svgIcon]="'mat_solid:cancel'"></mat-icon>
+                                                    </button>
+                                                  </mat-chip>
+                                                  <input placeholder="Nuevo Campo..."
+                                                        [matChipInputFor]="chipListOpc"
+                                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                        [matChipInputAddOnBlur]="addOnBlur"
+                                                        (matChipInputTokenEnd)="addOpcApi($event)">
+                                                </mat-chip-list>
+                                              </mat-form-field>
+                                        </div>
+                                        <div class="flex justify-end mt-8">
+                                            <button
+                                                class="px-8 mr-2"
+                                                mat-flat-button
+                                                [color]="'accent'"
+                                                type="button"
+                                                matStepperPrevious>
+                                                Atras
+                                            </button>
+                                            <button
+                                                class="px-8"
+                                                mat-flat-button
+                                                [color]="'primary'"
+                                                type="reset"
+                                                (click)="validarApi()">
+                                                Validar y Guardar
+                                            </button>
+                                        </div>
+                                    </mat-step>
+                            </mat-horizontal-stepper>
+                            <button
+                                mat-flat-button
+                                [color]="'warn-400'"
+                                (click)="addOpciones()"
+                                [disabled]="!canSave">
+                                + Opciones
+                            </button>
+                        </div>
+
+                        <div class="w-full mt-8 mb-7 border-b"></div>
+
+                        <div class="mt-12">
+                            <button
+                                mat-flat-button
+                                [color]="'primary'"
+                                (click)="saveAll()"
+                                [disabled]="!canSave">
+                                Guardar Cambios
+                            </button>
+                            <button
+                                *ngIf="mostrar"
+                                mat-flat-button
+                                [color]="'secondary'"
+                                (click)="close()">
+                                Cancelar
+                            </button>
+                        </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
