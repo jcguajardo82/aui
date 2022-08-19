@@ -21,7 +21,7 @@ export class MenuService {
   }  
   
     getMenusRol(): Observable<any> {
-      return this.http.get<any[]>(`${environment.API_URL}/api/UpdMenuGetMenusRol`); 
+      return this.http.get<any[]>(`${environment.API_URL}/api/GetMenusRolF`); 
     }
   
     getMenu(idMenu): Observable<any> {
