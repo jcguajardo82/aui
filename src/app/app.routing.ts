@@ -81,6 +81,7 @@ export const appRoutes: Route[] = [
             {path: 'menus', component:MenusComponent},
             {path: 'roles', component:RolesComponent},
             {path: 'bot', loadChildren: () => import('app/modules/admin/configuration/bot-options/bot-options.module').then(m => m.BotOptionsModule)},
+            {path: 'chat', loadChildren: () => import('app/modules/admin/chat/chat.module').then(m => m.ChatModule)},
         ]
     }
 ];

@@ -1,0 +1,22 @@
+<div>
+    <!-- <button type="button" mat-raised-button (click)="fileInput.click()">
+      Adjuntar
+    </button> -->
+    <button
+        class="ml-0.5"
+        mat-icon-button
+        (click)="fileInput.click()"
+        >
+        <mat-icon [svgIcon]="'heroicons_outline:paper-clip'"></mat-icon>
+    </button>
+    <input
+      type="file"
+      hidden
+      #fileInput
+      (change)="change($event)"/>
+</div>
+<!-- <div>
+  <div *ngIf="image">
+      <img [src]="image" />
+  </div>
+</div> -->
