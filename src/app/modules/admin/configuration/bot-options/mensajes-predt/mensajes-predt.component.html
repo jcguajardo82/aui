@@ -1,0 +1,54 @@
+
+    <div class="max-w-3xl">
+        <div class="example-viewer">
+            <!-- <div class="title">
+                <h6>Configure the dialog and preview it</h6>
+            </div> -->
+
+            <div class="flex flex-col p-8 pt-0">
+                <mat-form-field appearance="fill">
+                    <mat-label>Selecciona un Mensaje</mat-label>
+                    <mat-select
+                        [(ngModel)]="selectedValue"
+                        name="nombreMensaje"
+                        (selectionChange)="getById()"
+                    >
+                        <mat-option
+                            *ngFor="let mensaje of MensajesLst"
+                            [value]="mensaje.id"
+                        >
+                            {{ mensaje.nombreMensaje }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-label>Escriba el Mensaje </mat-label>
+                <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label>Mensaje</mat-label>
+                    <!-- <input type="text" formControlName="mensaje" matInput /> -->
+                    <textarea matInput [(ngModel)]="mensaje"></textarea>
+                    <!-- <mat-error>Debe Escribir un texto para poder Enviar</mat-error> -->
+                </mat-form-field>
+
+                <div class="w-full mt-8 mb-7 border-b"></div>
+
+                <div class="mt-12">
+                    <button
+                        mat-flat-button
+                        (click)="save()"
+                        [color]="'primary'"
+                    >
+                        Guardar Cambios
+                    </button>
+                    <button
+                        mat-flat-button
+                        [color]="'secondary'"
+                        (click)="close()"
+                    >
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+

@@ -7,6 +7,7 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { ParamsInput } from 'app/models/paramsInput';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {MatTable} from '@angular/material/table';
+import { MensajesPredtComponent } from 'app/modules/admin/configuration/bot-options/mensajes-predt/mensajes-predt.component'
 
 @Component({
   selector: 'app-bot-options',
@@ -343,15 +344,15 @@ export class BotOptionsComponent implements OnInit, AfterContentChecked {
       }
       this.table.renderRows();
     }
-    // msg(){
-    //   //alert(opcion.mensaje);
-    //   const dialogRefM = this._dialog.open(MensajesPredtComponent,{
-    //     width:"700px"
-    //   });
-    //   dialogRefM.afterClosed().subscribe(res =>{
-    //     //this.getOpciones();
-    //   })
-    // }
+    msg(){
+      //alert(opcion.mensaje);
+      const dialogRefM = this._dialog.open(MensajesPredtComponent,{
+        width:"700px"
+      });
+      dialogRefM.afterClosed().subscribe(res =>{
+        //this.getOpciones();
+      })
+    }
 
     close(){
       this._dialogRef.close();

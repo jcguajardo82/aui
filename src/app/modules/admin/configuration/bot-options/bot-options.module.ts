@@ -13,6 +13,7 @@ import {MatDialogModule, MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/
 import { FuseHighlightModule } from '@fuse/components/highlight';
 import { SharedModule } from 'app/shared/shared.module';
 import { BotOptionsComponent } from 'app/modules/admin/configuration/bot-options/bot-options.component';
+import { MensajesPredtComponent } from 'app/modules/admin/configuration/bot-options/mensajes-predt/mensajes-predt.component';
 
 export const routes: Route[] = [
     {
@@ -23,7 +24,8 @@ export const routes: Route[] = [
 
 @NgModule({
     declarations: [
-        BotOptionsComponent
+        BotOptionsComponent,
+        MensajesPredtComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
