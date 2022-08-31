@@ -7,6 +7,7 @@ import { RolModalComponent } from '../rol-modal/rol-modal.component';
 import { MatTreeNestedDataSource } from "@angular/material/tree";
 import { NestedTreeControl } from "@angular/cdk/tree";
 
+
 interface MenuNode {
   name: string;
   id?: number;
@@ -22,7 +23,24 @@ interface MenuNode {
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
+  styles: [`
+  .example-tree-invisible {
+  display: none;
+}
 
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.checklist-leaf-node {
+  padding-left: 40px;
+}
+
+
+`],
 })
 export class RolesComponent implements OnInit {
  roles: Rol[];
