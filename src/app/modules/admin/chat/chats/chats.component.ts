@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation, AfterViewChecked } from '@angular/core';
-import { Subject, takeUntil, interval, catchError, throwError } from 'rxjs';
+import { Subject, takeUntil, interval, catchError, throwError, Observable } from 'rxjs';
 import { Chat, Profile } from 'app/modules/admin/chat/chat.types';
 import { ChatService } from 'app/modules/admin/chat/chat.service';
 import Pusher  from 'pusher-js'
+import { Store } from '@ngxs/store';
+import { UserInfo } from 'app/models/userInfo'
+
 
 @Component({
     selector       : 'chat-chats',
@@ -12,6 +15,7 @@ import Pusher  from 'pusher-js'
 })
 export class ChatsComponent implements OnInit, OnDestroy, AfterViewChecked
 {
+    user$: Observable<UserInfo>;
     chats: Chat[];
     drawerComponent: 'profile' | 'new-chat';
     drawerOpened: boolean = false;
@@ -19,6 +23,7 @@ export class ChatsComponent implements OnInit, OnDestroy, AfterViewChecked
     profile: Profile;
     selectedChat: Chat;
     changes = false;
+    userName = '';
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -26,9 +31,11 @@ export class ChatsComponent implements OnInit, OnDestroy, AfterViewChecked
      */
     constructor(
         private _chatService: ChatService,
-        private _changeDetectorRef: ChangeDetectorRef
+        private _changeDetectorRef: ChangeDetectorRef,
+        private store: Store
     )
     {
+        this.user$ = this.store.select(state => state.user.user);
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -62,6 +69,11 @@ export class ChatsComponent implements OnInit, OnDestroy, AfterViewChecked
     }
     ngOnInit(): void
     {
+        this.user$
+            .subscribe((user: UserInfo) => {
+                console.log('userCHat', user);
+                this.userName = user.name;
+            });
         // Chats
         this._chatService.chats$
             .pipe(takeUntil(this._unsubscribeAll))

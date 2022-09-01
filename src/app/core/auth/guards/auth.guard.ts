@@ -74,6 +74,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
                    .pipe(
                        switchMap((authenticated) => {
 
+                            //console.log('Valida si esta autent');
                            // If the user is not authenticated...
                            if ( !authenticated )
                            {
@@ -82,7 +83,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
 
                                // Prevent the access
                                return of(false);
-                           }
+                           }else
+                            this._authService.checkUserInfo();
 
                            // Allow the access
                            return of(true);

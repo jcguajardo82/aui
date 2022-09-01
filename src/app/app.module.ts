@@ -14,7 +14,7 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { UsersComponent } from './modules/config/users/users.component';
 
-import { MatTableModule } from '@angular/material/table'  
+import { MatTableModule } from '@angular/material/table'
 
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { UserModalComponent } from './modules/config/users/user-modal/user-modal.component';
@@ -32,7 +32,8 @@ import { MenuModalComponent } from './modules/config/menus/menu-modal/menu-modal
 import { RolesComponent } from './modules/config/roles/roles/roles.component';
 import { RolModalComponent } from './modules/config/roles/rol-modal/rol-modal.component';
 import {MatTreeModule} from '@angular/material/tree';
-import {CdkTreeModule} from '@angular/cdk/tree';
+import { NgxsModule } from '@ngxs/store';
+import { UserState } from 'state/user.state';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -48,9 +49,9 @@ const routerConfig: ExtraOptions = {
         MenuModalComponent,
         RolesComponent,
         RolModalComponent,
-        
 
-   
+
+
     ],
     imports     : [
         BrowserModule,
@@ -84,7 +85,8 @@ const routerConfig: ExtraOptions = {
         FormsModule,
         MatToolbarModule,
         MatTreeModule,
-        
+        NgxsModule.forRoot([UserState]),
+
     ],
     bootstrap   : [
         AppComponent

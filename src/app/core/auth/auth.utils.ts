@@ -1,3 +1,4 @@
+import { UserInfo } from 'app/models/userInfo'
 // -----------------------------------------------------------------------------------------------------
 // @ AUTH UTILITIES
 //
@@ -44,6 +45,20 @@ export class AuthUtils
 
         // Check if the token is expired
         return !(date.valueOf() > new Date().valueOf() + offsetSeconds * 1000);
+    }
+
+    static _getUserInfoByToken(token: string): UserInfo | null
+    {
+        // Get the decoded token
+        const decodedToken = this._decodeToken(token);
+        const _userInfo : UserInfo={
+            name:decodedToken.user.name,
+            email:decodedToken.user.email,
+            idRol:decodedToken.roleId,
+            rol:decodedToken.role
+        }
+
+        return _userInfo;
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -188,7 +203,7 @@ export class AuthUtils
     {
         // Get the decoded token
         const decodedToken = this._decodeToken(token);
-
+        console.log('Token info', decodedToken);
         // Return if the decodedToken doesn't have an 'exp' field
         if ( !decodedToken.hasOwnProperty('exp') )
         {
