@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { BooleanInput } from '@angular/cdk/coercion';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil,Observable } from 'rxjs';
 import { User } from 'app/core/user/user.types';
 import { UserService } from 'app/core/user/user.service';
+import { Store } from '@ngxs/store';
+import { UserInfo } from 'app/models/userInfo'
+
 
 @Component({
     selector       : 'user',
@@ -14,6 +17,7 @@ import { UserService } from 'app/core/user/user.service';
 })
 export class UserComponent implements OnInit, OnDestroy
 {
+    user$: Observable<UserInfo>;
     /* eslint-disable @typescript-eslint/naming-convention */
     static ngAcceptInputType_showAvatar: BooleanInput;
     /* eslint-enable @typescript-eslint/naming-convention */
@@ -29,9 +33,11 @@ export class UserComponent implements OnInit, OnDestroy
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _router: Router,
-        private _userService: UserService
+        private _userService: UserService,
+        private store: Store
     )
     {
+        this.user$ = this.store.select(state => state.user.user);
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -44,12 +50,28 @@ export class UserComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         // Subscribe to user changes
-        this._userService.user$
+       /*  this._userService.user$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((user: User) => {
                 this.user = user;
 
                 // Mark for check
+                this._changeDetectorRef.markForCheck();
+            }); */
+
+            this.user$
+            .subscribe((user: UserInfo) => {
+                console.log('userComponet', user);
+
+                const _user : User= {
+                    id    : 'cfaad35d-07a3-4447-a6c3-d8c3d54fd5df',
+                    name  : user.name,
+                    email : user.email,
+                    avatar: null,
+                    status: 'online'
+                };
+
+                this.user = _user;
                 this._changeDetectorRef.markForCheck();
             });
     }
