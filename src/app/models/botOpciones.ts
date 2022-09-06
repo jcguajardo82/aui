@@ -11,4 +11,5 @@ export interface BotOpciones{
   opcionesMsjApi?: string;
   opcionesApi?: string;
   tipoRetorno:string;
+  rolId: number;
 }
