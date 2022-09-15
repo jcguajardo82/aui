@@ -4,10 +4,9 @@
 
 export const environment = {
     production: false,
-    //API_URL: 'http://localhost:7071',
-    API_URL: 'https://baseitechfunction.azurewebsites.net',
-    apiURL: 'http://localhost:55564/api',
     ppsApiUrl : 'http://localhost:55564/api'
+    apiURL: 'http://localhost:55564/api',
+    API_URL: 'https://baseitechfunction.azurewebsites.net',
 };
 
 /*
