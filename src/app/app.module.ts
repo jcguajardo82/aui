@@ -34,6 +34,7 @@ import { RolModalComponent } from './modules/config/roles/rol-modal/rol-modal.co
 import {MatTreeModule} from '@angular/material/tree';
 import {CdkTreeModule} from '@angular/cdk/tree';
 
+
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
     scrollPositionRestoration: 'enabled'
@@ -48,8 +49,7 @@ const routerConfig: ExtraOptions = {
         MenuModalComponent,
         RolesComponent,
         RolModalComponent,
-        
-
+     
    
     ],
     imports     : [
