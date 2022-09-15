@@ -9,6 +9,8 @@ export class User {
     this.fechaModificacion = null;
     this.usuario = "";
     this.rol = 0;
+    this.correo="";
+    this.password="";
   } 
   
   idUsuario: number;
@@ -20,6 +22,8 @@ export class User {
     fechaModificacion?: Date;
     usuario?: string;
     rol?: number;
+    correo:string;
+    password:string;
 
    
 }

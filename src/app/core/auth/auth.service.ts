@@ -5,10 +5,16 @@ import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
 import { environment } from '../../../environments/environment';
 import { User } from 'app/core/user/user.types';
+import { Store } from '@ngxs/store';
+import { UserAdd } from 'state/user.actions'
+import { UserInfo } from 'app/models/userInfo'
+
 
 @Injectable()
 export class AuthService
 {
+    user$: Observable<UserInfo>;
+
     private _authenticated: boolean = false;
     private _user:User;
     /**
@@ -16,9 +22,11 @@ export class AuthService
      */
     constructor(
         private _httpClient: HttpClient,
-        private _userService: UserService
+        private _userService: UserService,
+        private store: Store
     )
     {
+        this.user$ = this.store.select(state => state.user.user);
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -96,6 +104,14 @@ signIn(credentials: { username: string; password: string }): Observable<any>
                     status:response.result.user.status
                 }
 
+                const _userInfo : UserInfo={
+                    name:response.result.user.name,
+                    email:response.result.user.email,
+                    idRol:response.result.idRol,
+                    rol:response.result.user.rol
+                }
+
+                this.store.dispatch(new UserAdd(_userInfo));
 
                 this._userService.user =this._user; //response.result.user;
 
@@ -206,8 +222,30 @@ test:any;
         }
 
         // If the access token exists and it didn't expire, sign in using it
-        
+
         //return this.signInUsingToken();
         return  of(true);
+    }
+
+    checkUserInfo()
+    {
+        this.user$
+        .subscribe((user: UserInfo) => {
+            //console.log('userCHat', user);
+
+            if(user == undefined){
+                // const _userInfo : UserInfo={
+                //     name:'Alex',
+                //     email:'misHuev@pp.com',
+                //     idRol:1,
+                //     rol:'Admin'
+                // }
+
+                const _userInfo = AuthUtils._getUserInfoByToken(this.accessToken);
+
+                this.store.dispatch(new UserAdd(_userInfo));
+
+            }
+        });
     }
 }

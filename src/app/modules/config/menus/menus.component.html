@@ -2,16 +2,20 @@
 <div class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
     <div class="p-6">
         <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">Administración de Menus</div>
-  <!--       <div class="text-secondary font-medium">1 pending, 4 completed</div> -->
-    </div>
  
+    </div>
+    <div class="flex items-center justify-between w-full">
     <div class="overflow-x-auto mx-3">
-        <mat-select [placeholder]="'Seleccione un Menu'" id="ddlMenu"   [(ngModel)]="this.selectedMenu"   
-        (ngModelChange)="onChangeMenu()"   >
-            <mat-option *ngFor="let item of menus" [value]="item.menuId" >
-                {{ item.descripcion }}
-            </mat-option>      
-        </mat-select>   
+        <mat-form-field class="flex-auto gt-xs:pr-3">
+            <mat-select [placeholder]="'Seleccione un Menu'" id="ddlMenu"   [(ngModel)]="this.selectedMenu"   
+            (ngModelChange)="onChangeMenu()"   >
+                <mat-option *ngFor="let item of menus" [value]="item.menuId" >
+                    {{ item.descripcion }}
+                </mat-option>      
+            </mat-select>               
+        </mat-form-field>
+    </div>
+    <div class="flex items-center ml-6">
         <button
         class="ml-4 px-1 sm:px-4 min-w-10"
         mat-flat-button
@@ -20,31 +24,30 @@
         <mat-icon
             class="icon-size-5"
             [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
-        <span class="hidden sm:inline-block ml-2">New Menu</span>
+        <span class="hidden sm:inline-block ml-2">Nuevo Menu</span>
         </button>
-        
-    </div>
- 
-    <button
+        <button
+            class="ml-4 px-1 sm:px-4 min-w-10"
+            mat-flat-button
+            [color]="'accent'"
+            (click)="editMenu()">
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:pencil-alt'"></mat-icon>
+            <span class="hidden sm:inline-block ml-2">Editar Menu</span>
+        </button>  
+        <button
         class="ml-4 px-1 sm:px-4 min-w-10"
         mat-flat-button
-        [color]="'primary'"
-        (click)="editMenu()">
+        [color]="'warn'"
+        (click)="deleteItem(0)">
         <mat-icon
             class="icon-size-5"
-            [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
-        <span class="hidden sm:inline-block ml-2">Edit Menu</span>
-    </button>  
-    <button
-    class="ml-4 px-1 sm:px-4 min-w-10"
-    mat-flat-button
-    [color]="'primary'"
-    (click)="deleteItem(0)">
-    <mat-icon
-        class="icon-size-5"
-        [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
-    <span class="hidden sm:inline-block ml-2">Delete Menu</span>
-    </button> 
+            [svgIcon]="'heroicons_solid:trash'"></mat-icon>
+        <span class="hidden sm:inline-block ml-2">Eliminar Menu</span>
+        </button> 
+    </div>
+    </div>
     <div class="overflow-x-auto mx-12">
         <table
         class="w-full bg-transparent"
@@ -156,7 +159,7 @@
             <mat-icon
                 class="icon-size-5"
                 [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
-            <span class="hidden sm:inline-block ml-2">New</span>
+            <span class="hidden sm:inline-block ml-2">Nuevo Submenu</span>
         </button>
 
         </mat-header-cell>

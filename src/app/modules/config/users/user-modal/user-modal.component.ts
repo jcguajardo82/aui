@@ -7,6 +7,7 @@ import {User} from 'app/models/user.model';
 import {Rol} from 'app/models/rol.model';
 import {RolService } from 'app/services/rol.service';
 import {UserService } from 'app/services/user.service';
+import { valid } from 'chroma-js';
 
 class Status {
   label: string;
@@ -66,7 +67,9 @@ export class UserModalComponent implements OnInit {
       this.dataForm = this._formBuilder.group({
         id          : [this._data.user.idUsuario, Validators.required],
         nombre      : [this._data.user.nombre, Validators.required],
+        correo      : [this._data.user.correo, [Validators.required, Validators.email]],
         usuario     : [this._data.user.usuario, [Validators.required]],
+        password     : [this._data.user.password, [Validators.required]],
         estatus     : ['', [Validators.required]],
         rol         : ['', Validators.required],
       });
@@ -98,6 +101,8 @@ export class UserModalComponent implements OnInit {
     this._user.rol=this.dataForm.value["rol"];
     this._user.activo=this.dataForm.value["estatus"];
     this._user.usuario=this.dataForm.value["usuario"];
+    this._user.correo=this.dataForm.value["correo"];
+    this._user.password=this.dataForm.value["password"];
 
     if(this._user.idUsuario==0){
         this.userService.Add(this._user)

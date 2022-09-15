@@ -3,11 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, filter, map, Observable, of, switchMap, take, tap, throwError } from 'rxjs';
 import { Chat, Contact, Profile } from 'app/modules/admin/chat/chat.types';
 import { environment } from 'environments/environment';
+import { Store } from '@ngxs/store';
+import { UserInfo } from 'app/models/userInfo'
+
 @Injectable({
     providedIn: 'root'
 })
 export class ChatService
 {
+    user$: Observable<UserInfo>;
+    _idRol=0;
     private apiURL = environment.apiURL;
 
     url: string = this.apiURL + '/Conversaciones/Chat';
@@ -20,8 +25,9 @@ export class ChatService
     /**
      * Constructor
      */
-    constructor(private _httpClient: HttpClient)
+    constructor(private _httpClient: HttpClient, private store: Store)
     {
+        this.user$ = this.store.select(state => state.user.user);
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -78,7 +84,11 @@ export class ChatService
     getChats(): Observable<any>
     {
         //return this._httpClient.get<Chat[]>('api/apps/chat/chats').pipe(
-        return this._httpClient.get<Chat[]>(this.url).pipe(
+            this.user$
+            .subscribe((user: UserInfo) => {
+                this._idRol = user.idRol;
+            });
+        return this._httpClient.get<Chat[]>(this.url + '?RolId=' + this._idRol).pipe(
             tap((response: Chat[]) => {
                 this._chats.next(response);
             })
@@ -131,7 +141,11 @@ export class ChatService
     getChatById(id: string): Observable<any>
     {
         //alert('entraaaaaaaaa');
-        return this._httpClient.get<Chat>(this.url + 'ById?id=' + id).pipe(
+        this.user$
+        .subscribe((user: UserInfo) => {
+            this._idRol = user.idRol;
+        });
+        return this._httpClient.get<Chat>(this.url + 'ById?id=' + id + '&RolId=' + this._idRol).pipe(
             map((chat) => {
                 //console.log(chat);
                 // Update the chat

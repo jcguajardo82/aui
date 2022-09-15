@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation, AfterViewChecked } from '@angular/core';
-import { Subject, takeUntil, interval, catchError, throwError } from 'rxjs';
+import { Subject, takeUntil, interval, catchError, throwError, Observable } from 'rxjs';
 import { Chat, Profile } from 'app/modules/admin/chat/chat.types';
 import { ChatService } from 'app/modules/admin/chat/chat.service';
 import Pusher  from 'pusher-js'
+import { Store } from '@ngxs/store';
+import { UserInfo } from 'app/models/userInfo'
+
 
 @Component({
     selector       : 'chat-chats',
@@ -12,6 +15,7 @@ import Pusher  from 'pusher-js'
 })
 export class ChatsComponent implements OnInit, OnDestroy, AfterViewChecked
 {
+    user$: Observable<UserInfo>;
     chats: Chat[];
     drawerComponent: 'profile' | 'new-chat';
     drawerOpened: boolean = false;
@@ -19,6 +23,8 @@ export class ChatsComponent implements OnInit, OnDestroy, AfterViewChecked
     profile: Profile;
     selectedChat: Chat;
     changes = false;
+    userName = '';
+    rolId = 0;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -26,9 +32,11 @@ export class ChatsComponent implements OnInit, OnDestroy, AfterViewChecked
      */
     constructor(
         private _chatService: ChatService,
-        private _changeDetectorRef: ChangeDetectorRef
+        private _changeDetectorRef: ChangeDetectorRef,
+        private store: Store
     )
     {
+        this.user$ = this.store.select(state => state.user.user);
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -40,29 +48,36 @@ export class ChatsComponent implements OnInit, OnDestroy, AfterViewChecked
      */
     ngAfterViewChecked(): void {
         //alert('cambio');
-        if (this.changes)
-        {
-            this._chatService.getChats()
-                .pipe(
-                    catchError((error) => {
+        // if (this.changes)
+        // {
+        //     this._chatService.getChats()
+        //         .pipe(
+        //             catchError((error) => {
 
-                        // Log the error
-                        console.error(error);
+        //                 // Log the error
+        //                 console.error(error);
 
-                        return throwError(error);
-                    })
-                ).subscribe((chats: Chat[]) => {
-                    this.chats = this.filteredChats = chats;
+        //                 return throwError(error);
+        //             })
+        //         ).subscribe((chats: Chat[]) => {
+        //             this.chats = this.filteredChats = chats;
 
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-                });
-            this.changes = false;
-        }
+        //         // Mark for check
+        //         this._changeDetectorRef.markForCheck();
+        //         });
+        //     this.changes = false;
+        // }
     }
     ngOnInit(): void
     {
+        this.user$
+            .subscribe((user: UserInfo) => {
+                this.userName = user.name;
+                console.log('rooool', user.idRol);
+                this.rolId = user.idRol;
+            });
         // Chats
+        //console.log('userCHat', this.userName);
         this._chatService.chats$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((chats: Chat[]) => {
@@ -100,12 +115,13 @@ export class ChatsComponent implements OnInit, OnDestroy, AfterViewChecked
             var channel = pusher.subscribe('BotChat');
             channel.bind('getChats', data => {
                 var _chat = JSON.parse(data.message);
-                 //console.log('hubo un cambio', r);
+                 console.log('hubo un cambio---------', _chat, 'rolId=', this.rolId, 'chats=', this.chats);
                  //this.changes = true;
-                var _chatSelected = this.chats.find(x => x.conversation === _chat.conversation);
+                var _chatSelected = this.chats.find(x => x.conversation === _chat.conversation && x.rolId === _chat.rolId);
 
                 if(_chatSelected != undefined || _chatSelected != null)
                 {
+                    console.log('entraaaaaaaaaaaaaaaaaaaaa------------');
                     _chatSelected.unreadCount = _chat.unreadCount;
                     _chatSelected.lastMessage = _chat.lastMessage;
                     _chatSelected.muted = _chat.muted;
@@ -122,8 +138,15 @@ export class ChatsComponent implements OnInit, OnDestroy, AfterViewChecked
 
                 }
                 else{
-                    this.chats.push(_chat);
-                    this.filteredChats.push(_chat);
+                    //console.log('entraaaaaaaaaaaaaaaaaaaaa eeeeeeelssssseeeeeeeeeeee');
+                    var _chatSelected = this.chats.find(x => x.rolId === _chat.rolId);
+
+                    if(_chatSelected != undefined || _chatSelected != null)
+                    {
+                        //console.log('entraaaaaaaaaaaaaaaaaaaaa iiiiiiiiiiiiiiiiifffffffffffffff');
+                        this.chats.push(_chat);
+                        this.filteredChats.push(_chat);
+                    }
                 }
 
                 // this.chats = this.filteredChats = r; original

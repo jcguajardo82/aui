@@ -80,6 +80,24 @@
             </td>
         </ng-container>
 
+
+        <!-- Amount -->
+        <ng-container matColumnDef="correo">
+            <th
+                mat-header-cell
+                mat-sort-header
+                *matHeaderCellDef>
+                Correo
+            </th>
+            <td
+                mat-cell
+                *matCellDef="let row">
+                <span class="pr-6 font-medium whitespace-nowrap">
+                    {{row.correo}}
+                </span>
+            </td>
+        </ng-container>
+
         <!-- Status -->
         <ng-container matColumnDef="activo">
             <th
@@ -100,6 +118,8 @@
             </td>
         </ng-container>
 
+
+        
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef>
         <!--                       <button mat-icon-button color="primary" (click)="addNew()">
@@ -114,7 +134,7 @@
             <mat-icon
                 class="icon-size-5"
                 [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
-            <span class="hidden sm:inline-block ml-2">New</span>
+            <span class="hidden sm:inline-block ml-2">Nuevo</span>
         </button>
 
             </mat-header-cell>

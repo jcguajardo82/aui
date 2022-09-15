@@ -3,4 +3,5 @@ export interface Bandeja{
   destinatario: string;
   visto: boolean;
   asesor: string;
+  rolId: number
 }
