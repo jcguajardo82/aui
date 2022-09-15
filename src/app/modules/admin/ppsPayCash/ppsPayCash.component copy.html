@@ -1,0 +1,187 @@
+<div class="relative flex flex-col flex-auto min-w-0 overflow-hidden">
+
+    <button mat-button (click)="openDialog()">Open dialog</button>
+    <!-- Header & Cards -->
+    <div class="relative pt-8 pb-12 sm:pt-20 sm:pb-24 px-6 sm:px-16 overflow-hidden">
+        <!-- Background - @formatter:off -->
+        <svg class="-z-1 absolute inset-0"
+             viewBox="0 0 960 540" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+            <g class="opacity-40 text-gray-200 dark:text-gray-800" fill="none" stroke="currentColor" stroke-width="100">
+                <circle r="234" cx="196" cy="23"></circle>
+                <circle r="234" cx="790" cy="491"></circle>
+            </g>
+        </svg>
+        <!-- @formatter:on -->
+        <!-- Header -->
+        <div class="flex flex-col items-center">
+            <!-- <h2 class="text-xl font-semibold">PAYCASH</h2> -->
+            <div class="mt-1 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight text-center">
+                PAYCASH
+            </div>
+            <div class="mt-3 sm:text-2xl text-center tracking-tight text-secondary">
+                <div class="">PayCash te permite atraer nuevos clientes y aumentar tus ingresos mediante una experiencia de pago flexible que se adapta a tus necesidades de cobro.</div>
+                <!-- <div class="">Take control of everything.</div> -->
+            </div>
+            <!-- Recurring selector -->
+            
+        </div>
+
+        <div class="flex p-12 bg-primary" style="border:2px solid black">  
+            
+            <div class="p-12 bg-primary">
+                <div class="flex p-12 justify-center mt-12 sm:mt-10"  style="border:2px solid blue">
+                    <fuse-card class="flex p-12 flex-col lg:flex-row max-w-sm lg:max-w-360">
+                        <div class="p-6" style="border:2px solid black">
+                                
+                                    <div class="flex">
+                                        <mat-form-field
+                                            [ngClass]="formFieldHelpers"
+                                            class="flex-auto">
+                                            <mat-label>Cantidad a Pagar:</mat-label>
+                                            <input
+                                                class="text-right"
+                                                matInput>
+                                            <span matPrefix>$</span>
+                                            <span matSuffix>.00</span>
+                                        </mat-form-field>
+                                    </div>
+                                    <!-- <div class="flex">
+                                        <mat-form-field
+                                            [ngClass]="formFieldHelpers"
+                                            class="flex-auto">
+                                            <mat-label>Cantidad a pagar:</mat-label>
+                                            <input
+                                                matInput
+                                                [placeholder]="'Ingresar la cantidad a pagar'">
+                                            
+                                        </mat-form-field>
+                                    </div> -->
+                                    <div class="flex flex-col gt-xs:flex-row">
+                                        <mat-form-field
+                                            [ngClass]="formFieldHelpers"
+                                            class="flex-auto gt-xs:pr-3">
+                                            <mat-label>Medio de Pago</mat-label>
+                                            <mat-select>
+                                                <mat-option value="select1-1">Generar QR</mat-option>
+                                                <mat-option value="select1-2">Generar Codigo de Barras</mat-option>
+                                                <mat-option value="select1-3">Generar liga de pasarela</mat-option>
+                                            </mat-select>
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                matPrefix
+                                                [svgIcon]="'heroicons_solid:ticket'"></mat-icon>
+                                        </mat-form-field>
+                                        <!-- <mat-form-field
+                                            [ngClass]="formFieldHelpers"
+                                            class="flex-auto gt-xs:pl-3">
+                                            <mat-label>Select with suffix</mat-label>
+                                            <mat-select>
+                                                <mat-option value="select2-1">Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1 Select 2-1</mat-option>
+                                                <mat-option value="select2-2">Select 2-2</mat-option>
+                                                <mat-option value="select2-3">Select 2-3</mat-option>
+                                            </mat-select>
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                matSuffix
+                                                [svgIcon]="'heroicons_solid:translate'"></mat-icon>
+                                        </mat-form-field> -->
+                                    </div>
+            
+                        </div>
+                        
+                        <div class="p-6"  style="border:2px solid red">
+                            <div class="text-3xl font-bold">Servicio de Soporte</div>
+                            <div class="mt-2 leading-relaxed text-secondary">
+                                Subscripcion de soporte de aplicaciones de ecommerce.
+                            </div>
+                            <div class="flex items-center mt-10">
+                                <div class="font-medium text-secondary">HERRAMIENTAS INCLUIDAS</div>
+                                <div class="flex-auto ml-2 border-b-2"></div>
+                            </div>
+                            <!-- Features -->
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-4 mt-6">
+                                <div class="flex items-center">
+                                    <mat-icon
+                                        class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2">Soporte 24 / 7</div>
+                                </div>
+                                <div class="flex items-center">
+                                    <mat-icon
+                                        class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2">Acceso de herramienta de reporteo</div>
+                                </div>
+                                <div class="flex items-center">
+                                    <mat-icon
+                                        class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2">Solucion de incidencias al momento</div>
+                                </div>
+                                <div class="flex items-center">
+                                    <mat-icon
+                                        class="icon-size-5 text-primary"
+                                        [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+                                    <div class="ml-2">Asignacion de un agente dedicado en su totalidad al soporte</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Price -->
+                        <div class="flex p-2 flex-col items-center p-3 bg-gray-100 dark:bg-black dark:bg-opacity-10">
+                            <div class="flex items-center whitespace-nowrap">
+                                <div class="text-4xl font-extrabold tracking-tight">$2,100.00</div>
+                                <div class="ml-2 text-2xl font-semibold text-secondary">MX</div>
+                            </div>
+                            <div class="font-medium text-center text-secondary">
+                                <div>Subscripcion Mensual</div>
+                                <!-- <div>you only pay once.</div> -->
+                            </div>
+                            <button
+                                class="w-full mt-8 lg:mt-auto"
+                                mat-flat-button
+                                [color]="'primary'">
+                                Enviar por Whatsapp
+                            </button>
+                            <button mat-button color="primary">Vista Previa del Metodo de Pago</button>
+                        </div>
+
+                    </fuse-card>
+                </div>
+
+            </div>
+           
+        </div>
+
+       
+
+       
+        
+        
+        <!-- <div class="flex">
+            <mat-form-field
+                [ngClass]="formFieldHelpers"
+                class="flex-auto">
+                <mat-label>Input with mat-select as prefix & suffix</mat-label>
+                <input matInput>
+                <mat-select
+                    [value]="'MX'"
+                    matPrefix>
+                    <mat-option [value]="'MX'">MX</mat-option>
+                    <mat-option [value]="'US'">US</mat-option>
+                </mat-select>
+                <mat-select
+                    [value]="'kg'"
+                    matSuffix>
+                    <mat-option [value]="'kg'">kg</mat-option>
+                    <mat-option [value]="'gr'">gr</mat-option>
+                    <mat-option [value]="'oz'">oz</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div> -->
+
+       
+    </div>
+
+
+</div>
+

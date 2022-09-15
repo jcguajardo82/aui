@@ -35,6 +35,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import { NgxsModule } from '@ngxs/store';
 import { UserState } from 'state/user.state';
 
+
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
     scrollPositionRestoration: 'enabled'
@@ -49,9 +50,9 @@ const routerConfig: ExtraOptions = {
         MenuModalComponent,
         RolesComponent,
         RolModalComponent,
+        
 
-
-
+   
     ],
     imports     : [
         BrowserModule,

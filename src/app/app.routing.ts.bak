@@ -82,10 +82,6 @@ export const appRoutes: Route[] = [
             {path: 'roles', component:RolesComponent},
             {path: 'bot', loadChildren: () => import('app/modules/admin/configuration/bot-options/bot-options.module').then(m => m.BotOptionsModule)},
             {path: 'chat', loadChildren: () => import('app/modules/admin/chat/chat.module').then(m => m.ChatModule)},
-            {path: 'pps', loadChildren: () => import('app/modules/admin/ppsDashboard/ppsDashboard.module').then(m => m.DashboardModule)},
-            {path: 'payCash', loadChildren: () => import('app/modules/admin/ppsPayCash/ppsPayCash.module').then(m => m.ppsPayCashModule)},
-            {path: 'pasarela', loadChildren: () => import('app/modules/admin/ppsPasarela/ppsPasarela.module').then(m => m.ppsPasarelaModule)},
-            
         ]
     }
 ];
