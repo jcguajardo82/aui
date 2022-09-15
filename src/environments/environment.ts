@@ -6,7 +6,7 @@ export const environment = {
     production: false,
     ppsApiUrl : 'http://localhost:55564/api',
     API_URL: 'https://baseitechfunction.azurewebsites.net',
-    apiURL:'http://localhost:55564/api'
+    apiURL:'http://whatsappitech.azurewebsites.net/api'
 };
 
 /*
