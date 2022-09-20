@@ -6,6 +6,9 @@ import { InitialDataResolver } from 'app/app.resolvers';
 import { UsersComponent } from './modules/config/users/users.component';
 import { MenusComponent } from './modules/config/menus/menus.component';
 import { RolesComponent } from './modules/config/roles/roles/roles.component';
+import { LanguagesComponent } from './layout/common/languages/languages.component';
+import { IdiomComponent } from './modules/config/idiom/idiom.component';
+import { LabelsComponent } from './modules/config/idiom/labels/labels.component';
 // @formatter:off
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
@@ -80,6 +83,9 @@ export const appRoutes: Route[] = [
             {path: 'users', component:UsersComponent},
             {path: 'menus', component:MenusComponent},
             {path: 'roles', component:RolesComponent},
+            {path: 'idiom', component:IdiomComponent},
+            { path: 'labels/:id', component: LabelsComponent },
+            
             {path: 'bot', loadChildren: () => import('app/modules/admin/configuration/bot-options/bot-options.module').then(m => m.BotOptionsModule)},
             {path: 'chat', loadChildren: () => import('app/modules/admin/chat/chat.module').then(m => m.ChatModule)},
         ]

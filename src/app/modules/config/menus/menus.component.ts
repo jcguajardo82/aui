@@ -40,7 +40,8 @@ export class MenusComponent implements OnInit {
 
   constructor(private menuService:MenuService,private _modal :MatDialog,
     private _fuseConfirmationService: FuseConfirmationService,
-    private _formBuilder: UntypedFormBuilder,) {
+    private _formBuilder: UntypedFormBuilder,
+   ) {
     this.status = [
       { label: 'Activo', val: 'true' },
       { label: 'Inactivo', val: 'false' },
@@ -227,7 +228,8 @@ export class MenusComponent implements OnInit {
             console.log(result);
             if(result=="confirmed")
             {
-              this.menuService.delMenuSub(id).subscribe(
+              console.log("Eliminar")
+              /* this.menuService.delMenuSub(id).subscribe(
                 data => {
                   if (data.isSuccess) {
                     this.ngOnInit();
@@ -243,7 +245,7 @@ export class MenusComponent implements OnInit {
                 error => {
                   console.log(error.message);
                   
-                });
+                }); */
             }
         });
   }
