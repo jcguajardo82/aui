@@ -8,6 +8,8 @@ import { ParamsInput } from 'app/models/paramsInput';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {MatTable} from '@angular/material/table';
 import { MensajesPredtComponent } from 'app/modules/admin/configuration/bot-options/mensajes-predt/mensajes-predt.component'
+import {Rol} from 'app/models/rol.model';
+import {RolService} from  'app/services/rol.service';
 
 @Component({
   selector: 'app-bot-options',
@@ -35,6 +37,8 @@ export class BotOptionsComponent implements OnInit, AfterContentChecked {
     public opcionesApiLST: string[]= [];
     selectMetodo= "GET";
     selectRetorno= "TEXTO";
+    selectRol= 0;
+    rolesLST: Rol[];
     public opcsLST: string[]= [];
     public paramsLST: ParamsInput[]=[
       // {
@@ -56,6 +60,7 @@ export class BotOptionsComponent implements OnInit, AfterContentChecked {
       private _dialog: MatDialog,
       public _dialogRef: MatDialogRef<any>,
       private cd: ChangeDetectorRef,
+      private rolService:RolService,
       @Inject(MAT_DIALOG_DATA) public param: any
     ) {
             if (this.param.id !== undefined)
@@ -79,6 +84,20 @@ export class BotOptionsComponent implements OnInit, AfterContentChecked {
     }
     async ngOnInit() {
         await this.start();
+        if(this.mostrar)
+        {
+            this.rolService.getAll() .subscribe(
+                data => {
+                  if(data.isSuccess){
+                  this.rolesLST = data.result;}
+                  else{
+                    console.log(data.message);
+                  }
+                },
+                error => {
+                  console.log(error.message);
+                });
+        }
     }
     ngAfterContentChecked() {
         this.cd.detectChanges();
@@ -144,6 +163,7 @@ export class BotOptionsComponent implements OnInit, AfterContentChecked {
               this._idPadre = res[0].idPadre;
               this.api = res[0].conApi;
               this.selectRetorno = res[0].tipoRetorno == null ? 'TEXTO' : res[0].tipoRetorno;
+              this.selectRol = res[0].rolId;
               if(this.api)
               {
                   if(res[0].urlApi != null){
@@ -241,7 +261,7 @@ export class BotOptionsComponent implements OnInit, AfterContentChecked {
               });
         });
       }
-      console.log('combo', this.opcsLST);
+      //console.log('combo', this.opcsLST);
     }
     add(event: MatChipInputEvent): void {
       const value = (event.value || '').trim();
@@ -255,7 +275,8 @@ export class BotOptionsComponent implements OnInit, AfterContentChecked {
           opcion:true,
           titulo: _length + ".- " + value,
           conApi: false,
-          tipoRetorno: this.selectRetorno
+          tipoRetorno: this.selectRetorno,
+          rolId: 1
         }).subscribe(res =>{
           if (res !== undefined){
           this.getOpciones();
@@ -375,7 +396,8 @@ export class BotOptionsComponent implements OnInit, AfterContentChecked {
         metodoApi:this.selectMetodo,
         opcionesMsjApi: this.opcionesMsjLST.join(),
         opcionesApi: this.opcionesApiLST.join(),
-        tipoRetorno: this.selectRetorno
+        tipoRetorno: this.selectRetorno,
+        rolId: this.selectRol
       }).subscribe(res =>{
         if (res !== undefined){
             if(this.mostrar)

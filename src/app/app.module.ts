@@ -58,8 +58,7 @@ const routerConfig: ExtraOptions = {
         IdiomModalComponent,
         LabelsComponent,
 
-
-
+   
     ],
     imports     : [
         BrowserModule,

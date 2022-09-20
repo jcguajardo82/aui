@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.userService.getAll() .subscribe(
+    this.userService.getAll().subscribe(
       data => {
         this.users = data.result;
 

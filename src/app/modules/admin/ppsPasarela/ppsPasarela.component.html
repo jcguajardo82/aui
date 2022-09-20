@@ -1,0 +1,186 @@
+<div class="relative flex flex-col flex-auto min-w-0 overflow-hidden">
+
+    <!-- Header & Cards -->
+    <div class="relative pt-8 pb-12 sm:pt-20 sm:pb-24 px-6 sm:px-16 overflow-hidden">
+        <!-- Background - @formatter:off -->
+        <svg class="-z-1 absolute inset-0"
+             viewBox="0 0 960 540" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+            <g class="opacity-40 text-gray-200 dark:text-gray-800" fill="none" stroke="currentColor" stroke-width="100">
+                <circle r="234" cx="196" cy="23"></circle>
+                <circle r="234" cx="790" cy="491"></circle>
+            </g>
+        </svg>
+        <!-- @formatter:on -->
+        <!-- Header -->
+        <div class="flex flex-col items-center">
+            <!-- <h2 class="text-xl font-semibold">PAYCASH</h2> -->
+            <div class="mt-1 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight text-center">
+                Itechpay
+            </div>
+        </div>
+
+                <div class="flex p-12 justify-center mt-12 sm:mt-10"  >
+                    <fuse-card class="flex p-12 flex-col lg:flex-row max-w-sm lg:max-w-360">
+                        <div class="p-6">
+                            <div class="text-3xl font-bold">Orden : 100200300</div>         
+                            
+                            <div class="flex">
+
+                                <div class="order-1 md:order-2 w-full md:w-40 md:ml-6 mb-8 md:mb-4 rounded-lg overflow-hidden">
+                                    <img
+                                        class="w-full h-full object-cover"
+                                        src="assets/images/paycash/cart_shop.png"
+                                        alt="Card cover image">
+                                </div>
+                            </div>
+                        
+                            <div class="text-3xl font-bold">
+                                <p>
+                                    <span matBadge="1" matBadgeSize="large">Total de Articulos : 10</span>
+                                </p>
+                            </div>
+
+                        </div>
+                        
+                        <!-- Price -->
+                        <div class="flex p-2 flex-col items-center p-3 bg-gray-100 dark:bg-black dark:bg-opacity-10">
+                            <div class="flex items-center whitespace-nowrap">
+                                <div class="text-4xl font-extrabold tracking-tight">$2,100.00</div>
+                                <div class="ml-2 text-2xl font-semibold text-secondary">MX</div>
+                            </div>
+                            <div class="font-medium text-center text-secondary">
+                                <div>Total de la orden</div>
+                                <!-- <div>you only pay once.</div> -->
+                            </div>
+                            <button
+                                class="w-full mt-8 lg:mt-auto"
+                                mat-flat-button
+                                [color]="'primary'">
+                                TC / TD
+                            </button>
+                            <button
+                                class="w-full mt-8 lg:mt-auto"
+                                mat-flat-button
+                                [color]="'#FDD835'" style="background-color:#FDD835 ;">
+                                
+                                Paypal
+                            </button>
+                            <button
+                                class="w-full mt-8 lg:mt-auto"
+                                mat-flat-button
+                                [color]="'warn'" style="background-color:#1E88E5 ;">
+                                Mercado Pago
+                            </button>
+                           
+                        </div>
+
+                       
+
+                    </fuse-card>
+
+                    
+                </div>        
+
+                <div class="flex  flex-col items-center">
+                    <fuse-alert
+                        [type]="'warning'"
+                        [appearance]="'outline'">
+                        <span fuseAlertTitle>PROCESANDO PAGO...</span>
+                        <!-- This is a alert with a 'warning' level severity -->
+                    </fuse-alert>    
+                </div>
+    </div>
+
+
+    <!-- <div class="relative pt-8 pb-12 sm:pt-20 sm:pb-24 px-6 sm:px-16 overflow-hidden">
+        
+        <fuse-card class="flex p-12 flex-col lg:flex-row max-w-sm lg:max-w-360">
+            
+            <div class="grid grid-cols-4 gap-6 w-full mt-8">
+                <div class="col-span-4">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Card holder</mat-label>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:user'"
+                            matPrefix></mat-icon>
+                        <input
+                            [formControlName]="'cardHolder'"
+                            matInput>
+                    </mat-form-field>
+                </div>
+                
+                <div class="col-span-4 sm:col-span-2">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Card number</mat-label>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:credit-card'"
+                            matPrefix></mat-icon>
+                        <input
+                            [formControlName]="'cardNumber'"
+                            matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <mat-form-field
+                        class="fuse-mat-no-subscript w-full"
+                        [floatLabel]="'always'">
+                        <mat-label>Expiration date</mat-label>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:calendar'"
+                            matPrefix></mat-icon>
+                        <input
+                            [formControlName]="'cardExpiration'"
+                            [placeholder]="'MM / YY'"
+                            matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>CVC / CVC2</mat-label>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:lock-closed'"
+                            matPrefix></mat-icon>
+                        <input
+                            [formControlName]="'cardCVC'"
+                            matInput>
+                    </mat-form-field>
+                </div>
+                <div class="col-span-4 sm:col-span-2">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Country</mat-label>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:location-marker'"
+                            matPrefix></mat-icon>
+                        <mat-select [formControlName]="'country'">
+                            <mat-option [value]="'usa'">United States</mat-option>
+                            <mat-option [value]="'canada'">Canada</mat-option>
+                            <mat-option [value]="'mexico'">Mexico</mat-option>
+                            <mat-option [value]="'france'">France</mat-option>
+                            <mat-option [value]="'germany'">Germany</mat-option>
+                            <mat-option [value]="'italy'">Italy</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-span-4 sm:col-span-2">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>ZIP / Postal code</mat-label>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:hashtag'"
+                            matPrefix></mat-icon>
+                        <input matInput>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="mt-11 mb-10 border-t"></div>
+        </fuse-card>    
+    </div> -->
+
+</div>
+

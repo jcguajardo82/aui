@@ -4,4 +4,5 @@ export interface ConversacionesDTO{
   Mensaje: string;
   BandejaId:number;
   Imagen?:File;
+  RolId:number;
 }

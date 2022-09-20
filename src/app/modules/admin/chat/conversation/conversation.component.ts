@@ -10,7 +10,7 @@ import {
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
-import { Subject, takeUntil, interval, catchError, throwError } from 'rxjs';
+import { Subject, takeUntil, Observable } from 'rxjs';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { Chat } from 'app/modules/admin/chat/chat.types';
 import { ChatService } from 'app/modules/admin/chat/chat.service';
@@ -20,6 +20,10 @@ import { ApibandejaService } from 'app/services/apibandeja.service';
 import { DeleteComponent } from '../delete/delete.component';
 import { MatDialog } from '@angular/material/dialog';
 import Pusher  from 'pusher-js'
+import { Store } from '@ngxs/store';
+import { UserInfo } from 'app/models/userInfo'
+
+
 
 @Component({
     selector: 'chat-conversation',
@@ -28,6 +32,7 @@ import Pusher  from 'pusher-js'
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConversationComponent implements OnInit, OnDestroy {
+    user$: Observable<UserInfo>;
     @ViewChild('messageInput') messageInput: ElementRef;
     chat: Chat;
     drawerMode: 'over' | 'side' = 'side';
@@ -36,7 +41,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
     mensaje = '';
     disableInput = false;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
-
+    rolId=0;
     /**
      * Constructor
      */
@@ -48,8 +53,12 @@ export class ConversationComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private _api: ApiconversacionesService,
         private _dialog: MatDialog,
-        private _apiBandeja: ApibandejaService
-    ) {}
+        private _apiBandeja: ApibandejaService,
+        private store: Store
+    )
+    {
+        this.user$ = this.store.select(state => state.user.user);
+    }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Decorated methods
@@ -89,6 +98,10 @@ export class ConversationComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        this.user$
+        .subscribe((user: UserInfo) => {
+            this.rolId = user.idRol;
+        });
         // Chat
         this._chatService.chat$
             .pipe(takeUntil(this._unsubscribeAll))
@@ -138,7 +151,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
             var channel = pusher.subscribe('BotChat');
             channel.bind('getChat', data => {
                // this.chat.messages  = null;
-            //     console.log('result', data);
+                 console.log('Conversation', data);
                var dest = this.route.snapshot.paramMap
                .get('id')
                .split('-')[1];
@@ -188,6 +201,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
                 Tipo: 'Asesor',
                 Mensaje: this.mensaje,
                 BandejaId: parseInt(_bandeja),
+                RolId: this.rolId
             });
             this.mensaje = '';
         }
@@ -202,6 +216,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
             Mensaje: 'Haz recibido un Archivo',
             BandejaId: parseInt(_bandeja),
             Imagen: file,
+            RolId: this.rolId
         });
     }
     cerrar() {
@@ -226,6 +241,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
                         destinatario: _dest,
                         visto: true,
                         asesor: 'yo',
+                        rolId: this.rolId
                     })
                     .subscribe((res) => {
                         if (res !== undefined) {

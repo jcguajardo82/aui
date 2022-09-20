@@ -58,7 +58,8 @@ get(_dest: string){
     formData.append('Destinatario', conver.Destinatario);
     formData.append('Tipo', conver.Tipo);
     formData.append('Mensaje', conver.Mensaje);
-      formData.append('BandejaId', conver.BandejaId.toString());
+    formData.append('RolId', conver.RolId.toString());
+    formData.append('BandejaId', conver.BandejaId.toString());
     if(conver.Imagen)
       formData.append('Imagen', conver.Imagen);
     return formData;

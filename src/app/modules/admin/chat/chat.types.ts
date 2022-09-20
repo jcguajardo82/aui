@@ -53,4 +53,5 @@ export interface Chat
         value?: string;
         createdAt?: string;
     }[];
+    rolId?: number;
 }

@@ -58,6 +58,20 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
+                        <mat-form-field style="width: 100%" appearance="fill">
+                            <mat-label>Selecciona el Asesor</mat-label>
+                            <mat-select
+                                [(ngModel)]="selectRol"
+                                name="asesor"
+                            >
+                                <mat-option
+                                    *ngFor="let item of rolesLST"
+                                    [value]="item.idRol"
+                                >
+                                    {{ item.nombreRol }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
 
                     <mat-label>Escriba el Mensaje Inicial </mat-label>
