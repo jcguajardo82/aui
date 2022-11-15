@@ -1,0 +1,121 @@
+<div style="max-width:1024px;padding:20px;margin: 50px auto;">
+
+    <!-- <h1>Expand Collapse Single/ Multiple Rows in Angular Material Datatable</h1>
+    <a
+      href="https://www.freakyjolly.com/expand-collapse-single-or-multiple-rows-in-angular-98-material-table-multiple-single/">Find
+      complete tutorial here</a>
+  
+    <div style="text-align: end;padding: 5px 204px;">
+      <a mat-raised-button href="javascript:void(0)" (click)="toggleTableRows()" color="primary">Toggle Rows</a>
+    </div> 
+  
+    'Id_cotize','NombreTipo','NombreMarca','NombreModelo','Anio','Vehiculo_desc','NombreGenero','cotize_Nombre','cotize_Apellidos'
+    ,'cotize_FechaNac','cotize_correo','cotize_telefono','cotize_CP'
+  -->
+  
+    <table mat-table [dataSource]="dataStudentsList" multiTemplateDataRows>
+  
+      <ng-container matColumnDef="Id_cotize">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.Id_cotize}} </td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="NombreTipo">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.NombreTipo}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="NombreMarca">
+        <th mat-header-cell *matHeaderCellDef> Marca </th>
+        <td mat-cell *matCellDef="let element"> {{element.NombreMarca}} </td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="NombreModelo">
+        <th mat-header-cell *matHeaderCellDef> Modelo </th>
+        <td mat-cell *matCellDef="let element"> {{element.NombreModelo}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Anio">
+        <th mat-header-cell *matHeaderCellDef> Año </th>
+        <td mat-cell *matCellDef="let element"> {{element.Anio}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Vehiculo_desc">
+        <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+        <td mat-cell *matCellDef="let element"> {{element.Vehiculo_desc}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="NombreGenero">
+        <th mat-header-cell *matHeaderCellDef> Genero </th>
+        <td mat-cell *matCellDef="let element"> {{element.NombreGenero}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cotize_Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre cotizacion </th>
+        <td mat-cell *matCellDef="let element"> {{element.cotize_Nombre}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cotize_Apellidos">
+        <th mat-header-cell *matHeaderCellDef> Apell. <br> Cotizacion </th>
+        <td mat-cell *matCellDef="let element"> {{element.cotize_Apellidos}} </td>
+      </ng-container>
+	
+      <ng-container matColumnDef="cotize_FechaNac">
+        <th mat-header-cell *matHeaderCellDef> Fec. Nac. Cot. </th>
+        <td mat-cell *matCellDef="let element"> {{element.cotize_FechaNac}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cotize_correo">
+        <th mat-header-cell *matHeaderCellDef> Email Cotizacion </th>
+        <td mat-cell *matCellDef="let element"> {{element.cotize_correo}} </td>
+      </ng-container>
+	
+      <ng-container matColumnDef="cotize_telefono">
+        <th mat-header-cell *matHeaderCellDef> Tel. Cotizacion </th>
+        <td mat-cell *matCellDef="let element"> {{element.cotize_telefono}} </td>
+      </ng-container>
+	
+      <ng-container matColumnDef="cotize_CP">
+        <th mat-header-cell *matHeaderCellDef> C.P. Cotizacion </th>
+        <td mat-cell *matCellDef="let element"> {{element.cotize_CP}} </td>
+      </ng-container>
+	
+      <!-- <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> PLANES </th>
+        <td mat-cell *matCellDef="let element">
+          <a mat-button href="javascript:void()" (click)="element.isExpanded = !element.isExpanded">COTIZACIONES</a>
+        </td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedStudentsColumnsList.length">
+  
+          <div class="row student-element-detail" [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'">
+            <mat-list>
+              <div mat-subheader>Subjects of {{element.name}}</div>
+              <mat-list-item *ngFor="let subject of element.subjects">
+                <div mat-line>{{subject.name}}</div>
+                <div mat-line> {{subject.type}} | Costo: {{subject.grade}}</div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+  
+        </td>
+      </ng-container> -->
+  
+  
+      <tr mat-header-row *matHeaderRowDef="displayedStudentsColumnsList;sticky: true"></tr>
+      <tr mat-row *matRowDef="let element; columns: displayedStudentsColumnsList;" class="student-element-row"
+        [class.student-expanded-row]="element.isExpanded"></tr>
+  
+      <!-- Extra row to show detail content column -->
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="student-detail-row"></tr>
+  
+    </table>
+  
+  
+  
+  </div>
