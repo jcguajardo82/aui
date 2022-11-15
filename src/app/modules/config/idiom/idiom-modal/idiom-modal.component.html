@@ -1,0 +1,77 @@
+<div >
+    <!-- Alert -->
+    <fuse-alert
+        class="mb-8"
+        *ngIf="alert"
+        [type]="alert.type"
+        [showIcon]="false">
+        {{alert.message}}
+    </fuse-alert>
+    <form
+        class="space-y-3"
+        [formGroup]="myNgForm"
+        #dataNgForm="ngForm"
+        >
+<!--                     <div class="mb-6">
+            <div class="text-2xl font-bold tracking-tight">Submit your request</div>
+            <div class="text-secondary">Your request will be processed and our support staff will get back to you in 24 hours.</div>
+        </div> -->
+        <input  hidden="true"  matInput class="form-control" formControlName="id" id="id">
+        <!-- Nombre -->
+        <mat-form-field class="w-full">
+            <input
+                matInput
+                [formControlName]="'nombre'"
+                id="nombre"
+                [required]="true">
+            <mat-label>
+                <ng-container *transloco="let t">
+                    {{t('eNombreIdioma')}}
+                     </ng-container>
+            </mat-label>
+            <mat-error *ngIf="myNgForm.get('nombre').hasError('required')">
+                <ng-container *transloco="let t">
+                    {{t('eRequerido')}}
+                     </ng-container>
+            </mat-error>
+        </mat-form-field>
+       
+        <!-- Subject -->
+        <mat-form-field class="w-full">
+            <input
+                matInput
+                id="codigo"
+                [formControlName]="'codigo'"
+                [required]="true">
+            <mat-label>                            
+                <ng-container *transloco="let t">
+                {{t('eCodigoIdioma')}}
+                 </ng-container>
+            </mat-label>
+            <mat-error *ngIf="myNgForm.get('codigo').hasError('required')">
+                <ng-container *transloco="let t">
+                    {{t('eRequerido')}}
+                     </ng-container>
+            </mat-error>
+        </mat-form-field>
+       
+        <!-- Actions -->
+        <div class="flex items-center justify-end">
+            <button mat-button (click)="onNoClick()">
+                <ng-container *transloco="let t">
+                    {{t('eCancelar')}}
+                     </ng-container>
+            </button>
+            <button
+                class="ml-2"
+                mat-flat-button
+                [color]="'primary'"
+          
+                (click)="Save()">
+                <ng-container *transloco="let t">
+                    {{t('eGuardar')}}
+                     </ng-container>
+            </button>
+        </div>
+    </form>
+</div>

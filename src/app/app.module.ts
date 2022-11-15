@@ -35,6 +35,10 @@ import {MatTreeModule} from '@angular/material/tree';
 import { NgxsModule } from '@ngxs/store';
 import { UserState } from 'state/user.state';
 
+import { TranslocoModule } from '@ngneat/transloco';
+import { IdiomComponent } from './modules/config/idiom/idiom.component';
+import { IdiomModalComponent } from './modules/config/idiom/idiom-modal/idiom-modal.component';
+import { LabelsComponent } from './modules/config/idiom/labels/labels.component';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -50,7 +54,9 @@ const routerConfig: ExtraOptions = {
         MenuModalComponent,
         RolesComponent,
         RolModalComponent,
-        
+        IdiomComponent,
+        IdiomModalComponent,
+        LabelsComponent,
 
    
     ],
@@ -86,6 +92,7 @@ const routerConfig: ExtraOptions = {
         FormsModule,
         MatToolbarModule,
         MatTreeModule,
+        TranslocoModule,
         NgxsModule.forRoot([UserState]),
 
     ],
